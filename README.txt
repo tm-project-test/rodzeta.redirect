@@ -30,4 +30,5 @@
 ## Тех. поддержка и кастомизация
 
 Оказывается на платной основе, e-mail: rivetweb@yandex.ru
+
 Багрепорты на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues и пул реквесты на https://github.com/rivetweb/bitrix-rodzeta.redirect/pulls
