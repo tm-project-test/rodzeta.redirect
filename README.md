@@ -31,5 +31,6 @@
 
 Оказывается на платной основе, e-mail: rivetweb@yandex.ru
 
-Багрепорты на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues 
+Багрепорты на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues
+
 Пул реквесты на https://github.com/rivetweb/bitrix-rodzeta.redirect/pulls
