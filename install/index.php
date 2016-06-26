@@ -16,7 +16,7 @@ Loc::loadMessages(__FILE__);
 
 class rodzeta_redirect extends CModule {
 
-	var $MODULE_ID = "rodzeta.redirect";
+	var $MODULE_ID = "rodzeta.redirect"; // FIX for bitrix rules
 
 	public $MODULE_VERSION;
 	public $MODULE_VERSION_DATE;
@@ -31,7 +31,7 @@ class rodzeta_redirect extends CModule {
 	//public $NEED_MODULES = array();
 
 	function __construct() {
-		//$this->MODULE_ID = "rodzeta.redirect";
+		$this->MODULE_ID = "rodzeta.redirect"; // NEED for showing module in /bitrix/admin/partner_modules.php?lang=ru
 
 		$arModuleVersion = array();
 		include __DIR__ . "/version.php";
