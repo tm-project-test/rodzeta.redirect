@@ -16,7 +16,8 @@ Loc::loadMessages(__FILE__);
 
 class rodzeta_redirect extends CModule {
 
-	public $MODULE_ID; // = "rodzeta.redirect";
+	var $MODULE_ID = "rodzeta.redirect";
+
 	public $MODULE_VERSION;
 	public $MODULE_VERSION_DATE;
 	public $MODULE_NAME;
@@ -30,7 +31,7 @@ class rodzeta_redirect extends CModule {
 	//public $NEED_MODULES = array();
 
 	function __construct() {
-		$this->MODULE_ID = "rodzeta.redirect";
+		//$this->MODULE_ID = "rodzeta.redirect";
 
 		$arModuleVersion = array();
 		include __DIR__ . "/version.php";
