@@ -12,7 +12,7 @@ use Bitrix\Main\EventManager;
 use Bitrix\Main\Config\Option;
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
-	if (substr($_SERVER["REQUEST_URI"], 0, 8) == "/bitrix/") {
+	if (CSite::InDir("/bitrix/")) {
 		return;
 	}
 
