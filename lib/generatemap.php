@@ -5,41 +5,47 @@
  * MIT License
  ************************************************************************************************/
 
-return function () {
-	$mapName = "/upload/cache.rodzeta.redirects.php";
-	$fname = "/upload/rodzeta.redirects.csv";
+namespace Rodzeta\Redirects;
 
-	$basePath = $_SERVER["DOCUMENT_ROOT"];
+final class Tools {
 
-	/*
-	$path = $basePath . dirname($mapName);
-	if (!is_dir($path)) {
-		mkdir($path, 0777, true);
-	}
-	*/
+	static function generate() {
+		$mapName = "/upload/cache.rodzeta.redirects.php";
+		$fname = "/upload/rodzeta.redirects.csv";
 
-	$fcsv = fopen($basePath . $fname, "r");
-	if ($fcsv === FALSE) {
-		return;
-	}
+		$basePath = $_SERVER["DOCUMENT_ROOT"];
 
-	$redirects = array();
-	$i = 0;
-	while (($row = fgetcsv($fcsv, 4000, "\t")) !== FALSE) {
-		$i++;
-		if ($i == 1) {
-			continue;
+		/*
+		$path = $basePath . dirname($mapName);
+		if (!is_dir($path)) {
+			mkdir($path, 0777, true);
 		}
-		if (count($row) != 2) {
-			continue;
+		*/
+
+		$fcsv = fopen($basePath . $fname, "r");
+		if ($fcsv === FALSE) {
+			return;
 		}
-		$redirects[trim($row[0])] = trim($row[1]);
+
+		$redirects = array();
+		$i = 0;
+		while (($row = fgetcsv($fcsv, 4000, "\t")) !== FALSE) {
+			$i++;
+			if ($i == 1) {
+				continue;
+			}
+			if (count($row) != 2) {
+				continue;
+			}
+			$redirects[trim($row[0])] = trim($row[1]);
+		}
+		fclose($fcsv);
+
+		file_put_contents(
+			$basePath . $mapName,
+			"<?php\nreturn " . var_export($redirects, true) . ";"
+		);
+
 	}
-	fclose($fcsv);
 
-	file_put_contents(
-		$basePath . $mapName,
-		"<?php\nreturn " . var_export($redirects, true) . ";"
-	);
-
-};
+}
