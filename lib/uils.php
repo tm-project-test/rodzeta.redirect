@@ -7,9 +7,9 @@
 
 namespace Rodzeta\Redirects;
 
-final class Tools {
+final class Utils {
 
-	static function generate() {
+	static function generateMap() {
 		$mapName = "/upload/cache.rodzeta.redirects.php";
 		$fname = "/upload/rodzeta.redirects.csv";
 
