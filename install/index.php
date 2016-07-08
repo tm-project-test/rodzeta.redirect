@@ -49,7 +49,7 @@ class rodzeta_redirect extends CModule {
 		$this->PARTNER_URI = "http://rodzeta.ru/";
 	}
 
-	function doInstall() {
+	function DoInstall() {
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		//RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart", 1);
@@ -63,7 +63,7 @@ class rodzeta_redirect extends CModule {
 		*/
 	}
 
-	function doUninstall() {
+	function DoUninstall() {
 		//UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart");
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		ModuleManager::unregisterModule($this->MODULE_ID);
