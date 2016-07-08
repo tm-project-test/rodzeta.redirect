@@ -1,7 +1,7 @@
 <?php
 
 /*
-namespace Rodzeta\Redirects;
+namespace Rodzeta\Redirect;
 
 class EventHandlers {
 

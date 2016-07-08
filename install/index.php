@@ -52,7 +52,7 @@ class rodzeta_redirect extends CModule {
 	function doInstall() {
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
-		//RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirects\EventHandlers", "OnPageStart", 1);
+		//RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart", 1);
 
 
 		/*
@@ -64,7 +64,7 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function doUninstall() {
-		//UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirects\EventHandlers", "OnPageStart");
+		//UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart");
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		ModuleManager::unregisterModule($this->MODULE_ID);
 

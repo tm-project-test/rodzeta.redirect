@@ -5,7 +5,7 @@
  * MIT License
  ************************************************************************************************/
 
-namespace Rodzeta\Redirects;
+namespace Rodzeta\Redirect;
 
 final class Utils {
 
