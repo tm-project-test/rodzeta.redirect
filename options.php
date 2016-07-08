@@ -55,14 +55,14 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_www", $request->getPost("redirect_www"));
 		Option::set("rodzeta.redirect", "redirect_https", $request->getPost("redirect_https"));
 
-		\Rodzeta\Redirect\Utils::generateMap();
+		\Rodzeta\Redirect\Utils::createMap();
 
 		CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_SAVED"),
 	    "TYPE" => "OK",
 	  ));
 	}	else if ($request->getPost("clear") != "") {
-		unlink($_SERVER["DOCUMENT_ROOT"] . "/upload/cache.rodzeta.redirects.php");
+		\Rodzeta\Redirect\Utils::clearMap();
 
 		CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_RESETED"),

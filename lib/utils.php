@@ -9,18 +9,11 @@ namespace Rodzeta\Redirect;
 
 final class Utils {
 
-	static function generateMap() {
-		$mapName = "/upload/cache.rodzeta.redirects.php";
+	const MAP_NAME = "/upload/cache.rodzeta.redirects.php";
+
+	static function createMap() {
 		$fname = "/upload/rodzeta.redirects.csv";
-
 		$basePath = $_SERVER["DOCUMENT_ROOT"];
-
-		/*
-		$path = $basePath . dirname($mapName);
-		if (!is_dir($path)) {
-			mkdir($path, 0777, true);
-		}
-		*/
 
 		$fcsv = fopen($basePath . $fname, "r");
 		if ($fcsv === FALSE) {
@@ -42,10 +35,17 @@ final class Utils {
 		fclose($fcsv);
 
 		file_put_contents(
-			$basePath . $mapName,
+			$basePath . self::MAP_NAME,
 			"<?php\nreturn " . var_export($redirects, true) . ";"
 		);
+	}
 
+	static function clearMap() {
+		unlink($_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME);
+	}
+
+	static function getMap() {
+		return include $_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME;
 	}
 
 }

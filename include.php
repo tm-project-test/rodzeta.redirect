@@ -28,7 +28,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$protocol = "https";
 		$url = $_SERVER["REQUEST_URI"];
 	}
-	$redirects = include $_SERVER["DOCUMENT_ROOT"] . "/upload/cache.rodzeta.redirects.php";
+	$redirects = \Rodzeta\Redirect\Utils::getMap();
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
 		$url = $redirects[$_SERVER["REQUEST_URI"]];
 	}
