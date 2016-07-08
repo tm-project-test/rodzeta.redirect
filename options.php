@@ -37,8 +37,8 @@ $tabControl = new CAdminTabControl("tabControl", array(
 <p>
 	<b>Как работает</b>
 	<ul>
-		<li>загрузите или создайте файл <b><a href="/upload/rodzeta.redirects.csv">rodzeta.redirects.csv</a></b> в папке /upload/ с помощью
-			<a target="_blank" href="/bitrix/admin/fileman_file_edit.php?path=%2Fupload%2Frodzeta.redirects.csv">стандартного файлового менеджера</a>;
+		<li>загрузите или создайте файл <b><a href="<?= \Rodzeta\Redirect\Utils::SRC_NAME ?>">rodzeta.redirects.csv</a></b> в папке /upload/ с помощью
+			<a target="_blank" href="/bitrix/admin/fileman_file_edit.php?path=<?= urlencode(\Rodzeta\Redirect\Utils::SRC_NAME) ?>">стандартного файлового менеджера</a>;
 		<li>формат файла: 2 колонки ("Откуда" "Куда"), разделитель полей - табуляция, первая строка - наименования полей;
 		<li>после изменений в файле rodzeta.redirects.csv - нажмите в настройке модуля кнопку "Применить настройки";
 	</ul>

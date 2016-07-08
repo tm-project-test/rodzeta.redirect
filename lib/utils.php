@@ -10,12 +10,12 @@ namespace Rodzeta\Redirect;
 final class Utils {
 
 	const MAP_NAME = "/upload/cache.rodzeta.redirects.php";
+	const SRC_NAME = "/upload/rodzeta.redirects.csv";
 
 	static function createMap() {
-		$fname = "/upload/rodzeta.redirects.csv";
 		$basePath = $_SERVER["DOCUMENT_ROOT"];
 
-		$fcsv = fopen($basePath . $fname, "r");
+		$fcsv = fopen($basePath . self::SRC_NAME, "r");
 		if ($fcsv === FALSE) {
 			return;
 		}
