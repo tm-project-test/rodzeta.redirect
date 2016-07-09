@@ -27,10 +27,14 @@
     /catalog/?goods=72  /
     /products/kategorya1/   /catalog/
 
+## Демо сайт
+
+http://rodzeta.ru/
+
 ## Тех. поддержка и кастомизация
 
 Оказывается на платной основе, e-mail: rivetweb@yandex.ru
 
-Багрепорты на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues
+Багрепорты и предложения на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues
 
 Пул реквесты на https://github.com/rivetweb/bitrix-rodzeta.redirect/pulls
