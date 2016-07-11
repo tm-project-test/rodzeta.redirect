@@ -55,7 +55,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_www", $request->getPost("redirect_www"));
 		Option::set("rodzeta.redirect", "redirect_https", $request->getPost("redirect_https"));
 
-		\Rodzeta\Redirect\Utils::createMap();
+		\Rodzeta\Redirect\Utils::createCache();
 
 		CAdminMessage::showMessage(array(
 	    "MESSAGE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_SAVED"),

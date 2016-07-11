@@ -12,7 +12,7 @@ final class Utils {
 	const MAP_NAME = "/upload/cache.rodzeta.redirects.php";
 	const SRC_NAME = "/upload/rodzeta.redirects.csv";
 
-	static function createMap() {
+	static function createCache() {
 		$basePath = $_SERVER["DOCUMENT_ROOT"];
 
 		$fcsv = fopen($basePath . self::SRC_NAME, "r");
