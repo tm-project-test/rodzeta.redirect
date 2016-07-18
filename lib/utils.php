@@ -50,7 +50,7 @@ final class Utils {
 
 	static function getMap() {
 		$fname = $_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME;
-		if (!file_exists($fname)) {
+		if (!file_exists($fname) || !is_readable($fname)) {
 			return array();
 		}
 		return include $fname;
