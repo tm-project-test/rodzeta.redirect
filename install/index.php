@@ -52,28 +52,11 @@ class rodzeta_redirect extends CModule {
 	function DoInstall() {
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
-		//RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart", 1);
-
-
-		/*
-		$APPLICATION->IncludeAdminFile(
-			"Установка модуля " . $this->MODULE_ID,
-			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/step.php"
-		);
-		*/
 	}
 
 	function DoUninstall() {
-		//UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID, "\Rodzeta\Redirect\EventHandlers", "OnPageStart");
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		ModuleManager::unregisterModule($this->MODULE_ID);
-
-		/*
-    $APPLICATION->IncludeAdminFile(
-    	"Деинсталляция модуля " . $this->MODULE_ID,
-    	$_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/unstep.php"
-    );
-    */
 	}
 
 }

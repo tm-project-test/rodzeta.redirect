@@ -14,7 +14,9 @@ final class Utils {
 
 	static function createCache() {
 		$basePath = $_SERVER["DOCUMENT_ROOT"];
-
+		if (!file_exists($basePath . self::SRC_NAME)) {
+			return;
+		}
 		$fcsv = fopen($basePath . self::SRC_NAME, "r");
 		if ($fcsv === FALSE) {
 			return;
@@ -41,11 +43,17 @@ final class Utils {
 	}
 
 	static function clearMap() {
-		unlink($_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME);
+		if (file_exists($_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME)) {
+			unlink($_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME);
+		}
 	}
 
 	static function getMap() {
-		return include $_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME;
+		$fname = $_SERVER["DOCUMENT_ROOT"] . self::MAP_NAME;
+		if (!file_exists($fname)) {
+			return array();
+		}
+		return include $fname;
 	}
 
 }
