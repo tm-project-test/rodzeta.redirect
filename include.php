@@ -18,6 +18,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 
 	$protocol = !empty($_SERVER["HTTPS"])? "https" : "http";
 	$host = $_SERVER["SERVER_NAME"];
+	$port = !empty($_SERVER["SERVER_PORT"])? (":" . $_SERVER["SERVER_PORT"]) : "";
 	$url = null;
 
 	if (Option::get("rodzeta.redirect", "redirect_www") == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
@@ -34,7 +35,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	}
 
 	if (!empty($url)) {
-		LocalRedirect($protocol . "://" . $host . $url, true, "301 Moved Permanently");
+		LocalRedirect($protocol . "://" . $host . $port . $url, true, "301 Moved Permanently");
 		exit;
 	}
 });
