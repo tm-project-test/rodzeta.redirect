@@ -19,13 +19,14 @@
 
 Для отключения редиректов из csv-файла нажмите "Сбросить кеш редиректов".
 
-Пример содержимого файла rodzeta.redirects.csv:
+### Пример содержимого файла rodzeta.redirects.csv
 
     Откуда  Куда
     /home/  /
     /kontakti/  /contacts/
     /catalog/?goods=72  /
     /products/kategorya1/   /catalog/
+    /catalog/1  http://villa-mia.ru/townships/
 
 ## Описание техподдержки и контактных данных
 
