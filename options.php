@@ -54,6 +54,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 	if (!empty($save) || !empty($restore)) {
 		Option::set("rodzeta.redirect", "redirect_www", $request->getPost("redirect_www"));
 		Option::set("rodzeta.redirect", "redirect_https", $request->getPost("redirect_https"));
+		Option::set("rodzeta.redirect", "redirect_slash", $request->getPost("redirect_slash"));
 
 		\Rodzeta\Redirect\Utils::createCache();
 
@@ -84,8 +85,8 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект с www на без www,
-				(www.example.org -> example.org)</label>
+			<label>Использовать редирект с www на без www,<br>
+				<b>www.</b>example.org -> example.org</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="redirect_www" value="Y" type="checkbox"
@@ -95,12 +96,23 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект с http на https,
-			 (http://example.org -> https://example.org)</label>
+			<label>Использовать редирект с http на https,<br>
+			 <b>http</b>://example.org -> <b>https</b>://example.org</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="redirect_https" value="Y" type="checkbox"
 				<?= Option::get("rodzeta.redirect", "redirect_https") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Использовать редирект со страниц без слеша на слеш,<br>
+			 /catalog -> <b>/catalog/</b></label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="redirect_slash" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.redirect", "redirect_slash") == "Y"? "checked" : "" ?>>
 		</td>
 	</tr>
 

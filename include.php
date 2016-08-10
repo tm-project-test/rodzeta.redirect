@@ -29,6 +29,16 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$protocol = "https";
 		$url = $_SERVER["REQUEST_URI"];
 	}
+	if (Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+		$u = parse_url($_SERVER["REQUEST_URI"]);
+		if (substr($u["path"], -1, 1) != "/") { // add slash to url
+			$u["path"] .= "/";
+			$url = $u["path"];
+			if (!empty($u["query"])) {
+				$url .= "?" . $u["query"];
+			}
+		}
+	}
 	$redirects = \Rodzeta\Redirect\Utils::getMap();
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
 		$url = $redirects[$_SERVER["REQUEST_URI"]];
