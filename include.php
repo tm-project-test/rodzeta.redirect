@@ -20,6 +20,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	$host = $_SERVER["SERVER_NAME"];
 	$port = !empty($_SERVER["SERVER_PORT"])? (":" . $_SERVER["SERVER_PORT"]) : "";
 	$url = null;
+	$isAbsoluteUrl = false;
 
 	if (Option::get("rodzeta.redirect", "redirect_www") == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
 		$host = substr($_SERVER["SERVER_NAME"], 4);
@@ -42,10 +43,17 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	$redirects = \Rodzeta\Redirect\Utils::getMap();
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
 		$url = $redirects[$_SERVER["REQUEST_URI"]];
+		if (substr($url, 0, 4) == "http") {
+			$isAbsoluteUrl = true;
+		}
 	}
 
 	if (!empty($url)) {
-		LocalRedirect($protocol . "://" . $host . $port . $url, true, "301 Moved Permanently");
+		if ($isAbsoluteUrl) {
+			LocalRedirect($url, true, "301 Moved Permanently");
+		} else {
+			LocalRedirect($protocol . "://" . $host . $port . $url, true, "301 Moved Permanently");
+		}
 		exit;
 	}
 });
