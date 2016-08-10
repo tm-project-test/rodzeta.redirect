@@ -12,7 +12,8 @@ use Bitrix\Main\EventManager;
 use Bitrix\Main\Config\Option;
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
-	if (CSite::InDir("/bitrix/")) {
+	if (CSite::InDir("/bitrix/") ||
+				($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")) {
 		return;
 	}
 
