@@ -55,6 +55,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_www", $request->getPost("redirect_www"));
 		Option::set("rodzeta.redirect", "redirect_https", $request->getPost("redirect_https"));
 		Option::set("rodzeta.redirect", "redirect_slash", $request->getPost("redirect_slash"));
+		Option::set("rodzeta.redirect", "redirect_index", $request->getPost("redirect_index"));
 
 		\Rodzeta\Redirect\Utils::createCache();
 
@@ -113,6 +114,17 @@ $tabControl->begin();
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="redirect_slash" value="Y" type="checkbox"
 				<?= Option::get("rodzeta.redirect", "redirect_slash") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Использовать редирект со страниц <b>*/index.php</b> на <b>*/</b>,<br>
+			 /about/index.php -> <b>/about/</b></label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="redirect_index" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.redirect", "redirect_index") == "Y"? "checked" : "" ?>>
 		</td>
 	</tr>
 

@@ -31,16 +31,31 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$protocol = "https";
 		$url = $_SERVER["REQUEST_URI"];
 	}
-	if (Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+	if (Option::get("rodzeta.redirect", "redirect_index") == "Y"
+				|| Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+		$changed = false;
 		$u = parse_url($_SERVER["REQUEST_URI"]);
-		if (substr($u["path"], -1, 1) != "/") { // add slash to url
-			$u["path"] .= "/";
+		if (Option::get("rodzeta.redirect", "redirect_index") == "Y") {
+			$tmp = rtrim($u["path"], "/");
+			if (basename($tmp) == "index.php") {
+				$u["path"] = dirname($tmp) . "/";
+				$changed = true;
+			}
+		}
+		if (Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+			if (substr($u["path"], -1, 1) != "/") { // add slash to url
+				$u["path"] .= "/";
+				$changed = true;
+			}
+		}
+		if ($changed) {
 			$url = $u["path"];
 			if (!empty($u["query"])) {
 				$url .= "?" . $u["query"];
 			}
 		}
 	}
+
 	$redirects = \Rodzeta\Redirect\Utils::getMap();
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
 		$url = $redirects[$_SERVER["REQUEST_URI"]];
