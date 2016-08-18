@@ -38,12 +38,15 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		if (Option::get("rodzeta.redirect", "redirect_index") == "Y") {
 			$tmp = rtrim($u["path"], "/");
 			if (basename($tmp) == "index.php") {
-				$u["path"] = dirname($tmp) . "/";
+				$dname = dirname($tmp);
+				$u["path"] = ($dname != DIRECTORY_SEPARATOR? $dname : "") . "/";
 				$changed = true;
 			}
 		}
 		if (Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
-			if (substr($u["path"], -1, 1) != "/") { // add slash to url
+			// add slash to url
+			if (substr($u["path"], -1, 1) != "/"
+						&& substr(basename(rtrim($u["path"], "/")), -4) != ".php") {
 				$u["path"] .= "/";
 				$changed = true;
 			}
