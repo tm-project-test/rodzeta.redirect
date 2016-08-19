@@ -56,6 +56,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_https", $request->getPost("redirect_https"));
 		Option::set("rodzeta.redirect", "redirect_slash", $request->getPost("redirect_slash"));
 		Option::set("rodzeta.redirect", "redirect_index", $request->getPost("redirect_index"));
+		Option::set("rodzeta.redirect", "redirect_multislash", $request->getPost("redirect_multislash"));
 
 		\Rodzeta\Redirect\Utils::createCache();
 
@@ -125,6 +126,17 @@ $tabControl->begin();
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="redirect_index" value="Y" type="checkbox"
 				<?= Option::get("rodzeta.redirect", "redirect_index") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>Использовать редирект с удалением множественных слешей,<br>
+			 //news///index.php -> <b>/news/</b></label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="redirect_multislash" value="Y" type="checkbox"
+				<?= Option::get("rodzeta.redirect", "redirect_multislash") == "Y"? "checked" : "" ?>>
 		</td>
 	</tr>
 

@@ -32,7 +32,8 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$url = $_SERVER["REQUEST_URI"];
 	}
 	if (Option::get("rodzeta.redirect", "redirect_index") == "Y"
-				|| Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+				|| Option::get("rodzeta.redirect", "redirect_slash") == "Y"
+				|| Option::get("rodzeta.redirect", "redirect_multislash") == "Y") {
 		$changed = false;
 		$u = parse_url($_SERVER["REQUEST_URI"]);
 		if (Option::get("rodzeta.redirect", "redirect_index") == "Y") {
@@ -48,6 +49,12 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 			if (substr($u["path"], -1, 1) != "/"
 						&& substr(basename(rtrim($u["path"], "/")), -4) != ".php") {
 				$u["path"] .= "/";
+				$changed = true;
+			}
+		}
+		if (Option::get("rodzeta.redirect", "redirect_multislash") == "Y") {
+			if (strpos($u["path"], "//") !== false) {
+				$u["path"] = preg_replace('{/+}s', "/", $u["path"]);
 				$changed = true;
 			}
 		}
