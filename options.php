@@ -10,7 +10,6 @@ defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 use Bitrix\Main\Application;
 use Bitrix\Main\Config\Option;
 use Bitrix\Main\Localization\Loc;
-use Bitrix\Main\Text\String;
 use Bitrix\Main\Loader;
 
 if (!$USER->isAdmin()) {
