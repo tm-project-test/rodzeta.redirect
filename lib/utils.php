@@ -12,23 +12,24 @@ final class Utils {
 	const MAP_NAME = "/upload/cache.rodzeta.redirects.php";
 	const SRC_NAME = "/upload/rodzeta.redirects.csv";
 
-	static function createCache() {
+	static function getMapFromCsv() {
+		$redirects = array();
 		$basePath = $_SERVER["DOCUMENT_ROOT"];
 		if (!file_exists($basePath . self::SRC_NAME)) {
-			return;
+			return $redirects;
 		}
 		$fcsv = fopen($basePath . self::SRC_NAME, "r");
-		if ($fcsv === FALSE) {
-			return;
+		if ($fcsv === false) {
+			return $redirects;
 		}
 
 		$redirects = array();
 		$i = 0;
-		while (($row = fgetcsv($fcsv, 4000, "\t")) !== FALSE) {
+		while (($row = fgetcsv($fcsv, 4000, "\t")) !== false) {
 			$i++;
-			if ($i == 1) {
-				continue;
-			}
+			//if ($i == 1) {
+			//	continue;
+			//}
 			if (count($row) != 2) {
 				continue;
 			}
@@ -36,6 +37,29 @@ final class Utils {
 		}
 		fclose($fcsv);
 
+		return $redirects;
+	}
+
+	static function saveToCsv($urls) {
+		$basePath = $_SERVER["DOCUMENT_ROOT"];
+		$fcsv = fopen($basePath . self::SRC_NAME, "w");
+		if ($fcsv === false) {
+			return;
+		}
+		foreach ($urls as $row) {
+			$row[0] = trim($row[0]);
+			$row[1] = trim($row[1]);
+			if ($row[0] == "" || $row[1] == "") {
+				continue;
+			}
+			fputcsv($fcsv, array($row[0], $row[1]), "\t");
+		}
+		fclose($fcsv);
+	}
+
+	static function createCache() {
+		$basePath = $_SERVER["DOCUMENT_ROOT"];
+		$redirects = self::getMapFromCsv();
 		file_put_contents(
 			$basePath . self::MAP_NAME,
 			"<?php\nreturn " . var_export($redirects, true) . ";"

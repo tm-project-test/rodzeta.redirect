@@ -37,6 +37,7 @@ $tabControl = new CAdminTabControl("tabControl", array(
 
 ?>
 
+<?php /*
 <?= BeginNote() ?>
 <p>
 	<b>Как работает</b>
@@ -51,6 +52,7 @@ $tabControl = new CAdminTabControl("tabControl", array(
 	Для отключения редиректов из csv-файла нажмите "Сбросить кеш редиректов".
 </p>
 <?= EndNote() ?>
+*/ ?>
 
 <?php
 
@@ -62,6 +64,7 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_index", $request->getPost("redirect_index"));
 		Option::set("rodzeta.redirect", "redirect_multislash", $request->getPost("redirect_multislash"));
 
+		\Rodzeta\Redirect\Utils::saveToCsv($request->getPost("redirect_urls"));
 		\Rodzeta\Redirect\Utils::createCache();
 
 		CAdminMessage::showMessage(array(
@@ -149,31 +152,56 @@ $tabControl->begin();
 	<tr>
 		<td colspan="2">
 
-			<div class="adm-list-table-wrap">
-				<table width="100%" class="adm-list-table">
-					<thead>
-						<tr class="adm-list-table-header">
-							<td class="adm-list-table-cell align-center">
-								Откуда
-							</td>
-							<td class="adm-list-table-cell align-center">
-								Куда
-							</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr class="adm-list-table-row">
-							<td class="adm-list-table-cell">
-								<input type="text" name="redirect[<?= $i ?>][0]" style="width:92%;">
-							</td>
+			<table width="100%">
+				<tbody>
 
-							<td class="adm-list-table-cell">
-								<input type="text" name="redirect[<?= $i ?>][1]" style="width:92%;">
+					<?php
+					$i = 0;
+					foreach (\Rodzeta\Redirect\Utils::getMapFromCsv() as $urlFrom => $urlTo) {
+						$i++;
+					?>
+						<tr>
+							<td>
+								<input type="text" placeholder="Откуда"
+									name="redirect_urls[<?= $i ?>][0]"
+									placeholder="Откуда"
+									value="<?= htmlspecialcharsex($urlFrom) ?>"
+									style="width:96%;">
+							</td>
+							<td>
+								<input type="text" placeholder="Куда"
+									name="redirect_urls[<?= $i ?>][1]"
+									placeholder="Куда"
+									value="<?= htmlspecialcharsex($urlTo) ?>"
+									style="width:96%;">
 							</td>
 						</tr>
-					</tbody>
-				</table>
-			</div>
+					<?php } ?>
+
+					<?php foreach (range(1, 20) as $n) {
+						$i++;
+					?>
+						<tr>
+							<td>
+								<input type="text" placeholder="Откуда"
+									name="redirect_urls[<?= $i ?>][0]"
+									placeholder="Откуда"
+									value=""
+									style="width:96%;">
+							</td>
+							<td>
+								<input type="text" placeholder="Куда"
+									name="redirect_urls[<?= $i ?>][1]"
+									placeholder="Куда"
+									value=""
+									style="width:96%;">
+							</td>
+						</tr>
+					<?php } ?>
+
+
+				</tbody>
+			</table>
 
 		</td>
 	</tr>
