@@ -166,14 +166,12 @@ $tabControl->begin();
 							<td>
 								<input type="text" placeholder="Откуда"
 									name="redirect_urls[<?= $i ?>][0]"
-									placeholder="Откуда"
 									value="<?= htmlspecialcharsex($urlFrom) ?>"
 									style="width:96%;">
 							</td>
 							<td>
 								<input type="text" placeholder="Куда"
 									name="redirect_urls[<?= $i ?>][1]"
-									placeholder="Куда"
 									value="<?= htmlspecialcharsex($urlTo) ?>"
 									style="width:96%;">
 							</td>
@@ -187,14 +185,12 @@ $tabControl->begin();
 							<td>
 								<input type="text" placeholder="Откуда"
 									name="redirect_urls[<?= $i ?>][0]"
-									placeholder="Откуда"
 									value=""
 									style="width:96%;">
 							</td>
 							<td>
 								<input type="text" placeholder="Куда"
 									name="redirect_urls[<?= $i ?>][1]"
-									placeholder="Куда"
 									value=""
 									style="width:96%;">
 							</td>
