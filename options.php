@@ -28,6 +28,11 @@ $tabControl = new CAdminTabControl("tabControl", array(
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_MAIN_TAB_SET"),
 		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_MAIN_TAB_TITLE_SET"),
   ),
+  array(
+		"DIV" => "edit2",
+		"TAB" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_SET"),
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_TITLE_SET"),
+  ),
 ));
 
 ?>
@@ -136,6 +141,40 @@ $tabControl->begin();
 		<td class="adm-detail-content-cell-r" width="50%">
 			<input name="redirect_multislash" value="Y" type="checkbox"
 				<?= Option::get("rodzeta.redirect", "redirect_multislash") == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<?php $tabControl->beginNextTab() ?>
+
+	<tr>
+		<td colspan="2">
+
+			<div class="adm-list-table-wrap">
+				<table width="100%" class="adm-list-table">
+					<thead>
+						<tr class="adm-list-table-header">
+							<td class="adm-list-table-cell align-center">
+								Откуда
+							</td>
+							<td class="adm-list-table-cell align-center">
+								Куда
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="adm-list-table-row">
+							<td class="adm-list-table-cell">
+								<input type="text" name="redirect[<?= $i ?>][0]" style="width:92%;">
+							</td>
+
+							<td class="adm-list-table-cell">
+								<input type="text" name="redirect[<?= $i ?>][1]" style="width:92%;">
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
 		</td>
 	</tr>
 
