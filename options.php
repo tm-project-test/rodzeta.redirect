@@ -31,7 +31,9 @@ $tabControl = new CAdminTabControl("tabControl", array(
   array(
 		"DIV" => "edit2",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_SET"),
-		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_TITLE_SET"),
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_TITLE_SET", array(
+			"#FILE#" => \Rodzeta\Redirect\Utils::SRC_NAME)
+		),
   ),
 ));
 
