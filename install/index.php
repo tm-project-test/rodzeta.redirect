@@ -1,9 +1,11 @@
 <?php
-/***********************************************************************************************
+/*******************************************************************************
  * rodzeta.redirect - SEO redirects module
  * Copyright 2016 Semenov Roman
  * MIT License
- ************************************************************************************************/
+ ******************************************************************************/
+
+// NOTE this file must compatible with php 5.3
 
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
@@ -16,7 +18,7 @@ Loc::loadMessages(__FILE__);
 
 class rodzeta_redirect extends CModule {
 
-	var $MODULE_ID = "rodzeta.redirect"; // FIX for bitrix rules
+	var $MODULE_ID = "rodzeta.redirect"; // NOTE using "var" for bitrix rules
 
 	public $MODULE_VERSION;
 	public $MODULE_VERSION_DATE;
@@ -31,7 +33,7 @@ class rodzeta_redirect extends CModule {
 	//public $NEED_MODULES = array();
 
 	function __construct() {
-		$this->MODULE_ID = "rodzeta.redirect"; // NEED for showing module in /bitrix/admin/partner_modules.php?lang=ru
+		$this->MODULE_ID = "rodzeta.redirect"; // NOTE for showing module in /bitrix/admin/partner_modules.php?lang=ru
 
 		$arModuleVersion = array();
 		include __DIR__ . "/version.php";
