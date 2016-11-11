@@ -19,7 +19,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 
 	$protocol = !empty($_SERVER["HTTPS"])? "https" : "http";
 	$host = $_SERVER["SERVER_NAME"];
-	$port = !empty($_SERVER["SERVER_PORT"])? (":" . $_SERVER["SERVER_PORT"]) : "";
+	$port = !empty($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80"? (":" . $_SERVER["SERVER_PORT"]) : "";
 	$url = null;
 	$isAbsoluteUrl = false;
 
