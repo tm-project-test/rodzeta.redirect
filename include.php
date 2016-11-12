@@ -17,8 +17,11 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		return;
 	}
 
-	$protocol = !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off" ? "https" : "http";
+	$protocol = !empty($_SERVER["HTTPS"])
+		&& $_SERVER["HTTPS"] != "off"? "https" : "http";
+
 	$host = $_SERVER["SERVER_NAME"];
+
 	$port = !empty($_SERVER["SERVER_PORT"])
 		&& $_SERVER["SERVER_PORT"] != "80"
 		&& $_SERVER["SERVER_PORT"] != "443"?
