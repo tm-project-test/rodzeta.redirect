@@ -19,7 +19,10 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 
 	$protocol = !empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] != "off" ? "https" : "http";
 	$host = $_SERVER["SERVER_NAME"];
-	$port = !empty($_SERVER["SERVER_PORT"]) && $_SERVER["SERVER_PORT"] != "80"? (":" . $_SERVER["SERVER_PORT"]) : "";
+	$port = !empty($_SERVER["SERVER_PORT"])
+		&& $_SERVER["SERVER_PORT"] != "80"
+		&& $_SERVER["SERVER_PORT"] != "443"?
+			(":" . $_SERVER["SERVER_PORT"]) : "";
 	$url = null;
 	$isAbsoluteUrl = false;
 
@@ -27,10 +30,16 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$host = substr($_SERVER["SERVER_NAME"], 4);
 		$url = $_SERVER["REQUEST_URI"];
 	}
-	if (Option::get("rodzeta.redirect", "redirect_https") == "Y" && $protocol == "http") {
+
+	$toProtocol = Option::get("rodzeta.redirect", "redirect_https");
+	if ($toProtocol == "to_https" && $protocol == "http") {
 		$protocol = "https";
 		$url = $_SERVER["REQUEST_URI"];
+	} else if ($toProtocol == "to_http" && $protocol == "https") {
+		$protocol = "http";
+		$url = $_SERVER["REQUEST_URI"];
 	}
+
 	if (Option::get("rodzeta.redirect", "redirect_index") == "Y"
 				|| Option::get("rodzeta.redirect", "redirect_slash") == "Y"
 				|| Option::get("rodzeta.redirect", "redirect_multislash") == "Y") {

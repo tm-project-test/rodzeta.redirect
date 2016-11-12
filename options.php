@@ -96,7 +96,7 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект с www на без www,<br>
+			<label>Редирект с www на без www,<br>
 				<b>www.</b>example.org -> example.org</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
@@ -107,18 +107,30 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект с http на https,<br>
-			 <b>http</b>://example.org -> <b>https</b>://example.org</label>
+			<label>Редирект http <-> https,<br>
+			 <b>http</b>://example.org <-> <b>https</b>://example.org</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="redirect_https" value="Y" type="checkbox"
-				<?= Option::get("rodzeta.redirect", "redirect_https") == "Y"? "checked" : "" ?>>
+			<label>
+				<input name="redirect_https" value="" type="radio"
+					<?= Option::get("rodzeta.redirect", "redirect_https") == ""? "checked" : "" ?>> не использовать
+			</label>
+			<br>
+			<label>
+				<input name="redirect_https" value="to_https" type="radio"
+					<?= Option::get("rodzeta.redirect", "redirect_https") == "to_https"? "checked" : "" ?>> на https://*
+			</label>
+			<br>
+			<label>
+				<input name="redirect_https" value="to_http" type="radio"
+					<?= Option::get("rodzeta.redirect", "redirect_https") == "to_http"? "checked" : "" ?>> на http://*
+			</label>
 		</td>
 	</tr>
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект со страниц без слеша на слеш,<br>
+			<label>Редирект со страниц без слеша на слеш,<br>
 			 /catalog -> <b>/catalog/</b></label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
@@ -129,7 +141,7 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект со страниц <b>*/index.php</b> на <b>*/</b>,<br>
+			<label>Редирект со страниц <b>*/index.php</b> на <b>*/</b>,<br>
 			 /about/index.php -> <b>/about/</b></label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
@@ -140,7 +152,7 @@ $tabControl->begin();
 
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
-			<label>Использовать редирект с удалением множественных слешей,<br>
+			<label>Редирект с удалением множественных слешей,<br>
 			 //news///index.php -> <b>/news/</b></label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
