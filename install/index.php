@@ -7,7 +7,7 @@
 
 // NOTE this file must compatible with php 5.3
 
-defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
+defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
 use Bitrix\Main\Application;
 use Bitrix\Main\Loader;
@@ -37,7 +37,6 @@ class rodzeta_redirect extends CModule {
 
 		$arModuleVersion = array();
 		include __DIR__ . "/version.php";
-
 		if (!empty($arModuleVersion["VERSION"])) {
 			$this->MODULE_VERSION = $arModuleVersion["VERSION"];
 			$this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
@@ -52,10 +51,14 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function DoInstall() {
-		if (version_compare(PHP_VERSION, '7', '<')
-					|| !defined("BX_UTF")) {
-			global $APPLICATION;
+		// check module requirements
+		global $APPLICATION;
+		if (version_compare(PHP_VERSION, "7", "<")) {
    		$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
+			return false;
+		}
+		if (!defined("BX_UTF")) {
+   		$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_BITRIX_UTF8"));
 			return false;
 		}
 
