@@ -52,7 +52,8 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function DoInstall() {
-		if (version_compare(PHP_VERSION, '7', '<')) {
+		if (version_compare(PHP_VERSION, '7', '<')
+					|| !defined("BX_UTF")) {
 			global $APPLICATION;
    		$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
 			return false;
