@@ -5,6 +5,8 @@
  * MIT License
  ******************************************************************************/
 
+namespace Rodzeta\Redirect;
+
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
 use Bitrix\Main\Loader;
@@ -12,16 +14,14 @@ use Bitrix\Main\EventManager;
 use Bitrix\Main\Config\Option;
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
-	if (CSite::InDir("/bitrix/") ||
+	if (\CSite::InDir("/bitrix/") ||
 				($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")) {
 		return;
 	}
 
+	$host = $_SERVER["SERVER_NAME"];
 	$protocol = !empty($_SERVER["HTTPS"])
 		&& $_SERVER["HTTPS"] != "off"? "https" : "http";
-
-	$host = $_SERVER["SERVER_NAME"];
-
 	$port = !empty($_SERVER["SERVER_PORT"])
 		&& $_SERVER["SERVER_PORT"] != "80"
 		&& $_SERVER["SERVER_PORT"] != "443"?
@@ -78,7 +78,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		}
 	}
 
-	$redirects = \Rodzeta\Redirect\Utils::getMap();
+	$redirects = Utils::getMap();
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
 		$url = $redirects[$_SERVER["REQUEST_URI"]];
 		if (substr($url, 0, 4) == "http") {

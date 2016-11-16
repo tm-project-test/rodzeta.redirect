@@ -52,6 +52,12 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function DoInstall() {
+		if (version_compare(PHP_VERSION, '7', '<')) {
+			global $APPLICATION;
+   		$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
+			return false;
+		}
+
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 	}

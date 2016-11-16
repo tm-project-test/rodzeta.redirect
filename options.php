@@ -5,6 +5,8 @@
  * MIT License
  ******************************************************************************/
 
+namespace Rodzeta\Redirect;
+
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
 use Bitrix\Main\Application;
@@ -22,39 +24,22 @@ $request = $context->getRequest();
 
 Loc::loadMessages(__FILE__);
 
-$tabControl = new CAdminTabControl("tabControl", array(
-  array(
+$tabControl = new \CAdminTabControl("tabControl", [
+  [
 		"DIV" => "edit1",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_MAIN_TAB_SET"),
 		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_MAIN_TAB_TITLE_SET"),
-  ),
-  array(
+  ],
+  [
 		"DIV" => "edit2",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_SET"),
-		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_TITLE_SET", array(
-			"#FILE#" => \Rodzeta\Redirect\Utils::SRC_NAME)
-		),
-  ),
-));
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_URLS_TAB_TITLE_SET", [
+			"#FILE#" => Utils::SRC_NAME
+		]),
+  ],
+]);
 
 ?>
-
-<?php /*
-<?= BeginNote() ?>
-<p>
-	<b>Как работает</b>
-	<ul>
-		<li>загрузите или создайте файл <b><a href="<?= \Rodzeta\Redirect\Utils::SRC_NAME ?>">rodzeta.redirects.csv</a></b> в папке /upload/ с помощью
-			<a target="_blank" href="/bitrix/admin/fileman_file_edit.php?path=<?= urlencode(\Rodzeta\Redirect\Utils::SRC_NAME) ?>">стандартного файлового менеджера</a>;
-		<li>формат файла: 2 колонки ("Откуда" "Куда"), разделитель полей - табуляция, первая строка - наименования полей;
-		<li>после изменений в файле rodzeta.redirects.csv - нажмите в настройке модуля кнопку "Применить настройки";
-	</ul>
-</p>
-<p>
-	Для отключения редиректов из csv-файла нажмите "Сбросить кеш редиректов".
-</p>
-<?= EndNote() ?>
-*/ ?>
 
 <?php
 
@@ -66,24 +51,22 @@ if ($request->isPost() && check_bitrix_sessid()) {
 		Option::set("rodzeta.redirect", "redirect_index", $request->getPost("redirect_index"));
 		Option::set("rodzeta.redirect", "redirect_multislash", $request->getPost("redirect_multislash"));
 
-		\Rodzeta\Redirect\Utils::saveToCsv($request->getPost("redirect_urls"));
-		\Rodzeta\Redirect\Utils::createCache();
+		Utils::saveToCsv($request->getPost("redirect_urls"));
+		Utils::createCache();
 
-		CAdminMessage::showMessage(array(
+		\CAdminMessage::showMessage([
 	    "MESSAGE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_SAVED"),
 	    "TYPE" => "OK",
-	  ));
+	  ]);
 	}	else if ($request->getPost("clear") != "") {
-		\Rodzeta\Redirect\Utils::clearMap();
+		Utils::clearMap();
 
-		CAdminMessage::showMessage(array(
+		\CAdminMessage::showMessage([
 	    "MESSAGE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_RESETED"),
 	    "TYPE" => "OK",
-	  ));
+	  ]);
 	}
 }
-
-
 
 $tabControl->begin();
 
@@ -171,7 +154,7 @@ $tabControl->begin();
 
 					<?php
 					$i = 0;
-					foreach (\Rodzeta\Redirect\Utils::getMapFromCsv() as $urlFrom => $urlTo) {
+					foreach (Utils::getMapFromCsv() as $urlFrom => $urlTo) {
 						$i++;
 					?>
 						<tr>
