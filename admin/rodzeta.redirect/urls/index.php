@@ -61,8 +61,8 @@ $currentOptions = Select(true);
 					</td>
 					<td>
 						<select name="redirect_urls[<?= $i ?>][2]" title="Статус" style="width:96%;">
-							<option value="301" <?= $url[2] == "301"? "checked" : "" ?>>301</option>
-							<option value="302" <?= $url[2] == "302"? "checked" : "" ?>>302</option>
+							<option value="301" <?= $url[2] == "301"? "selected" : "" ?>>301</option>
+							<option value="302" <?= $url[2] == "302"? "selected" : "" ?>>302</option>
 						</select>
 					</td>
 				</tr>
