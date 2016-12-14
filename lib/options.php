@@ -7,8 +7,6 @@
 
 namespace Rodzeta\Redirect\Options;
 
-use Bitrix\Main\Config\Option;
-
 use const Rodzeta\Redirect\CONFIG;
 
 function Update($data) {
