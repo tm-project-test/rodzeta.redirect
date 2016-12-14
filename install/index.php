@@ -50,6 +50,21 @@ class rodzeta_redirect extends CModule {
 		$this->PARTNER_URI = "http://rodzeta.ru/";
 	}
 
+	function InstallFiles() {
+		CopyDirFiles(
+			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/admin/" . $this->MODULE_ID,
+			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/" . $this->MODULE_ID,
+			true, true
+		);
+
+		return true;
+	}
+
+	function UninstallFiles() {
+		DeleteDirFilesEx("/bitrix/admin/" . $this->MODULE_ID);
+		return true;
+	}
+
 	function DoInstall() {
 		// check module requirements
 		global $APPLICATION;
@@ -64,9 +79,11 @@ class rodzeta_redirect extends CModule {
 
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
+		$this->InstallFiles();
 	}
 
 	function DoUninstall() {
+		$this->UninstallFiles();
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		ModuleManager::unregisterModule($this->MODULE_ID);
 	}
