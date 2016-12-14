@@ -13,7 +13,10 @@ const LIB = APP  . "lib/";
 const URL_ADMIN = "/bitrix/admin/" . ID . "/";
 
 define(__NAMESPACE__ . "\CONFIG",
-	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID . "/");
+	$_SERVER["DOCUMENT_ROOT"] . "/upload/"
+	. (substr($_SERVER["SERVER_NAME"], 0, 4) == "www."?
+			substr($_SERVER["SERVER_NAME"], 4) : $_SERVER["SERVER_NAME"])
+	. "/." . ID . "/");
 define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".urls.csv");
 define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
 

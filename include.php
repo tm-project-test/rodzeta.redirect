@@ -9,7 +9,7 @@ namespace Rodzeta\Redirect;
 
 defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
-use Bitrix\Main\{Loader, EventManager, Config\Option};
+use Bitrix\Main\{Loader, EventManager};
 
 require __DIR__ . "/.init.php";
 
@@ -64,10 +64,11 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 });
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
-	if (\CSite::InDir("/bitrix/") ||
-				($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")) {
+	if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
+			|| \CSite::InDir("/bitrix/")) {
 		return;
 	}
+	$currentOptions = Options\Select();
 
 	$host = $_SERVER["SERVER_NAME"];
 	$protocol = !empty($_SERVER["HTTPS"])
@@ -79,12 +80,12 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	$url = null;
 	$isAbsoluteUrl = false;
 
-	if (Option::get("rodzeta.redirect", "redirect_www") == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
+	if ($currentOptions["redirect_www"] == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
 		$host = substr($_SERVER["SERVER_NAME"], 4);
 		$url = $_SERVER["REQUEST_URI"];
 	}
 
-	$toProtocol = Option::get("rodzeta.redirect", "redirect_https");
+	$toProtocol = $currentOptions["redirect_https"];
 	if ($toProtocol == "to_https" && $protocol == "http") {
 		$protocol = "https";
 		$url = $_SERVER["REQUEST_URI"];
@@ -93,12 +94,12 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		$url = $_SERVER["REQUEST_URI"];
 	}
 
-	if (Option::get("rodzeta.redirect", "redirect_index") == "Y"
-				|| Option::get("rodzeta.redirect", "redirect_slash") == "Y"
-				|| Option::get("rodzeta.redirect", "redirect_multislash") == "Y") {
+	if ($currentOptions["redirect_index"] == "Y"
+				|| $currentOptions["redirect_slash"] == "Y"
+				|| $currentOptions["redirect_multislash"] == "Y") {
 		$changed = false;
 		$u = parse_url($_SERVER["REQUEST_URI"]);
-		if (Option::get("rodzeta.redirect", "redirect_index") == "Y") {
+		if ($currentOptions["redirect_index"] == "Y") {
 			$tmp = rtrim($u["path"], "/");
 			if (basename($tmp) == "index.php") {
 				$dname = dirname($tmp);
@@ -106,7 +107,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 				$changed = true;
 			}
 		}
-		if (Option::get("rodzeta.redirect", "redirect_slash") == "Y") {
+		if ($currentOptions["redirect_slash"] == "Y") {
 			// add slash to url
 			if (substr($u["path"], -1, 1) != "/"
 						&& substr(basename(rtrim($u["path"], "/")), -4) != ".php") {
@@ -114,7 +115,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 				$changed = true;
 			}
 		}
-		if (Option::get("rodzeta.redirect", "redirect_multislash") == "Y") {
+		if ($currentOptions["redirect_multislash"] == "Y") {
 			if (strpos($u["path"], "//") !== false) {
 				$u["path"] = preg_replace('{/+}s', "/", $u["path"]);
 				$changed = true;
