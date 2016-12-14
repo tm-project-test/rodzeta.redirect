@@ -25,25 +25,14 @@ $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
 
-/*
 StorageInit();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
-	Targets\Update($request->getPostList());
+	Update($request->getPostList());
 }
 
-$currentOptions = Targets\Select();
-if (empty($currentOptions)) {
-	// default example
-	$currentOptions = [[
-		'.mfeedback form input[type="submit"]',
-		'ObratniyZvonok',
-		'click',
-		'feedback',
-		'ObratniyZvonok',
-	]];
-}
+$currentOptions = Select(true);
 
 ?>
 
@@ -54,39 +43,27 @@ if (empty($currentOptions)) {
 		<tbody>
 			<?php
 			$i = 0;
-			foreach (AppendValues($currentOptions, 5, ["", "", "", "", ""]) as $target) {
+			foreach (AppendValues($currentOptions, 5, ["", "", ""]) as $url) {
 				$i++;
 			?>
 				<tr data-idx="<?= $i ?>">
 					<td>
-						<input type="text" placeholder="Селектор"
-							name="analytics_targets[<?= $i ?>][0]"
-							value="<?= htmlspecialcharsex($target[0]) ?>"
+						<input type="text" placeholder="Откуда"
+							name="redirect_urls[<?= $i ?>][0]"
+							value="<?= htmlspecialcharsex($url[0]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<input type="text" placeholder="Название цели (Яндекс.Метрика)"
-							name="analytics_targets[<?= $i ?>][1]"
-							value="<?= htmlspecialcharsex($target[1]) ?>"
+						<input type="text" placeholder="Куда"
+							name="redirect_urls[<?= $i ?>][1]"
+							value="<?= htmlspecialcharsex($url[1]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<input type="text" placeholder="Событие"
-							name="analytics_targets[<?= $i ?>][2]"
-							value="<?= htmlspecialcharsex($target[2]) ?>"
-							style="width:96%;">
-					</td>
-					<td>
-						<input type="text" placeholder="Объект (Google Analytics)"
-							name="analytics_targets[<?= $i ?>][3]"
-							value="<?= htmlspecialcharsex($target[3]) ?>"
-							style="width:96%;">
-					</td>
-					<td>
-						<input type="text" placeholder="Тип взаимодействия (Google Analytics)"
-							name="analytics_targets[<?= $i ?>][4]"
-							value="<?= htmlspecialcharsex($target[4]) ?>"
-							style="width:96%;">
+						<select name="redirect_urls[<?= $i ?>][2]" title="Статус" style="width:96%;">
+							<option value="301" <?= $url[2] == "301"? "checked" : "" ?>>301</option>
+							<option value="302" <?= $url[2] == "302"? "checked" : "" ?>>302</option>
+						</select>
 					</td>
 				</tr>
 			<?php } ?>
@@ -95,7 +72,7 @@ if (empty($currentOptions)) {
 
 </form>
 
-<?php if ($formSaved) { ?>
+<?php if (0 && 	$formSaved) { ?>
 
 	<script>
 		// close after submit
@@ -160,5 +137,3 @@ BX.ready(function () {
 });
 
 </script>
-
-<?php */

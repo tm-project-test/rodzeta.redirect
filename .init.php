@@ -14,9 +14,11 @@ const URL_ADMIN = "/bitrix/admin/" . ID . "/";
 
 define(__NAMESPACE__ . "\CONFIG",
 	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID . "/");
-define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".redirects.csv");
+define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".urls.csv");
+define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
 
 require LIB . "encoding/php-array.php";
+require LIB . "encoding/csv.php";
 require LIB . "options.php";
 
 function StorageInit() {
@@ -30,4 +32,25 @@ function AppendValues($data, $n, $v) {
 	for ($i = 0; $i < $n; $i++) {
 		yield  $v;
 	}
+}
+
+function Select($fromCsv = false) {
+	$result = [];
+	if ($fromCsv) {
+		$result = \Encoding\Csv\Read(FILE_REDIRECTS);
+	} else {
+		$result = \Encoding\PhpArray\Read(FILE_REDIRECTS_CACHE);
+	}
+	return $result;
+}
+
+function Update($data) {
+	$urls = [];
+	foreach ($data["redirect_urls"] as $url) {
+		if (trim($url[0]) != "" && trim($url[1]) != "") {
+			$urls[] = $url;
+		}
+	}
+	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
+	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urls);
 }
