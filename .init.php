@@ -14,6 +14,7 @@ const URL_ADMIN = "/bitrix/admin/" . ID . "/";
 
 define(__NAMESPACE__ . "\CONFIG",
 	$_SERVER["DOCUMENT_ROOT"] . "/upload/" . $_SERVER["SERVER_NAME"] . "/." . ID . "/");
+define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".redirects.csv");
 
 require LIB . "encoding/php-array.php";
 require LIB . "options.php";
