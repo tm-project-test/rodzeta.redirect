@@ -26,9 +26,9 @@ $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
 
-/*
 StorageInit();
 
+/*
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
 	$data = $request->getPostList();
