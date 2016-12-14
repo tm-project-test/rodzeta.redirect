@@ -42,18 +42,23 @@ function Select($fromCsv = false) {
 	if ($fromCsv) {
 		$result = \Encoding\Csv\Read(FILE_REDIRECTS);
 	} else {
-		$result = \Encoding\PhpArray\Read(FILE_REDIRECTS_CACHE);
+		$result = is_readable(FILE_REDIRECTS_CACHE)?
+			include FILE_REDIRECTS_CACHE : [];
 	}
 	return $result;
 }
 
 function Update($data) {
 	$urls = [];
+	$urlsMap = [];
 	foreach ($data["redirect_urls"] as $url) {
-		if (trim($url[0]) != "" && trim($url[1]) != "") {
+		$from = trim($url[0]);
+		$to = trim($url[1]);
+		if ($from != "" && $to != "") {
 			$urls[] = $url;
+			$urlsMap[$from] = [$to, trim($url[2])];
 		}
 	}
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
-	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urls);
+	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);
 }

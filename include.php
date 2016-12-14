@@ -95,8 +95,8 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	}
 
 	if ($currentOptions["redirect_index"] == "Y"
-				|| $currentOptions["redirect_slash"] == "Y"
-				|| $currentOptions["redirect_multislash"] == "Y") {
+			|| $currentOptions["redirect_slash"] == "Y"
+			|| $currentOptions["redirect_multislash"] == "Y") {
 		$changed = false;
 		$u = parse_url($_SERVER["REQUEST_URI"]);
 		if ($currentOptions["redirect_index"] == "Y") {
@@ -110,7 +110,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		if ($currentOptions["redirect_slash"] == "Y") {
 			// add slash to url
 			if (substr($u["path"], -1, 1) != "/"
-						&& substr(basename(rtrim($u["path"], "/")), -4) != ".php") {
+					&& substr(basename(rtrim($u["path"], "/")), -4) != ".php") {
 				$u["path"] .= "/";
 				$changed = true;
 			}
@@ -129,19 +129,22 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		}
 	}
 
-	$redirects = Utils::getMap();
+	$redirects = Select();
+	$status = "";
 	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
-		$url = $redirects[$_SERVER["REQUEST_URI"]];
+		list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
 		if (substr($url, 0, 4) == "http") {
 			$isAbsoluteUrl = true;
 		}
 	}
+	$status = $status == "302"?
+			"302 Found" : "301 Moved Permanently";
 
 	if (!empty($url)) {
 		if ($isAbsoluteUrl) {
-			LocalRedirect($url, true, "301 Moved Permanently");
+			LocalRedirect($url, true, $status);
 		} else {
-			LocalRedirect($protocol . "://" . $host . $port . $url, true, "301 Moved Permanently");
+			LocalRedirect($protocol . "://" . $host . $port . $url, true, $status);
 		}
 		exit;
 	}
