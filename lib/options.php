@@ -16,6 +16,7 @@ function Update($data) {
 		"redirect_slash" => $data["redirect_slash"],
 		"redirect_index" => $data["redirect_index"],
 		"redirect_multislash" => $data["redirect_multislash"],
+		"redirect_urls" => $data["redirect_urls"],
 	]);
 }
 
@@ -26,7 +27,7 @@ function Select() {
 		"redirect_https" => "",
 		"redirect_slash" => "Y",
 		"redirect_index" => "Y",
-		"redirect_multislash" => "Y",
+		"redirect_urls" => "Y",
 	];
 	return $result;
 }
