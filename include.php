@@ -129,16 +129,18 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		}
 	}
 
-	$redirects = Select();
 	$status = "";
-	if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
-		list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
-		if (substr($url, 0, 4) == "http") {
-			$isAbsoluteUrl = true;
+	if ($currentOptions["redirect_urls"] == "Y") {
+		$redirects = Select();
+		if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
+			list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
+			if (substr($url, 0, 4) == "http") {
+				$isAbsoluteUrl = true;
+			}
 		}
 	}
 	$status = $status == "302"?
-			"302 Found" : "301 Moved Permanently";
+		"302 Found" : "301 Moved Permanently";
 
 	if (!empty($url)) {
 		if ($isAbsoluteUrl) {
