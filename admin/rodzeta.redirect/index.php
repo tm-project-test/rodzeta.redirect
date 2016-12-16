@@ -111,6 +111,16 @@ $currentOptions = Options\Select();
 						<?= $currentOptions["redirect_multislash"] == "Y"? "checked" : "" ?>>
 				</td>
 			</tr>
+
+			<tr>
+				<td class="adm-detail-content-cell-l" width="50%">
+					<label>Использовать редиректы из списка</label>
+				</td>
+				<td class="adm-detail-content-cell-r" width="50%">
+					<input name="redirect_urls" value="Y" type="checkbox"
+						<?= $currentOptions["redirect_urls"] == "Y"? "checked" : "" ?>>
+				</td>
+			</tr>
 		</tbody>
 	</table>
 
