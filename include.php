@@ -70,9 +70,8 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		return;
 	}
 
-
 	if (!empty($_GET["debug"])) {
-		$currentOptions = \Rodzeta\Redirect\Options\Select();
+		//$currentOptions = \Rodzeta\Redirect\Options\Select();
 	}
 
 	return;

@@ -22,7 +22,6 @@ function Update($data) {
 
 function Select() {
 	$fname = \Rodzeta\Redirect\CONFIG . "options.php";
-	var_dump
 	$result = is_readable($fname)? include $fname : array(
 		"redirect_www" => "Y",
 		"redirect_https" => "",
