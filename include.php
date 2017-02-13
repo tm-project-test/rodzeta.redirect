@@ -69,7 +69,13 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 			|| \CSite::InDir("/bitrix/")) {
 		return;
 	}
-	$currentOptions = Options\Select();
+
+
+	if (!empty($_GET["debug"])) {
+		$currentOptions = \Rodzeta\Redirect\Options\Select();
+	}
+
+	return;
 
 	$host = $_SERVER["SERVER_NAME"];
 	$protocol = !empty($_SERVER["HTTPS"])

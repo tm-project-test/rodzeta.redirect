@@ -72,10 +72,10 @@ class rodzeta_redirect extends CModule {
 		//	$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_PHP_VERSION"));
 		//	return false;
 		//}
-		if (!defined("BX_UTF")) {
-			$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_BITRIX_UTF8"));
-			return false;
-		}
+		//if (!defined("BX_UTF")) {
+		//	$APPLICATION->ThrowException(Loc::getMessage("RODZETA_REQUIREMENTS_BITRIX_UTF8"));
+		//	return false;
+		//}
 
 		ModuleManager::registerModule($this->MODULE_ID);
 		RegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);

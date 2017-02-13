@@ -7,10 +7,10 @@
 
 namespace Rodzeta\Redirect\Options;
 
-use const Rodzeta\Redirect\CONFIG;
+//use const Rodzeta\Redirect\CONFIG;
 
 function Update($data) {
-	\Encoding\PhpArray\Write(CONFIG . "options.php", array(
+	\Encoding\PhpArray\Write(\Rodzeta\Redirect\CONFIG . "options.php", array(
 		"redirect_www" => $data["redirect_www"],
 		"redirect_https" => $data["redirect_https"],
 		"redirect_slash" => $data["redirect_slash"],
@@ -21,7 +21,8 @@ function Update($data) {
 }
 
 function Select() {
-	$fname = CONFIG . "options.php";
+	$fname = \Rodzeta\Redirect\CONFIG . "options.php";
+	var_dump
 	$result = is_readable($fname)? include $fname : array(
 		"redirect_www" => "Y",
 		"redirect_https" => "",

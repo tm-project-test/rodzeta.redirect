@@ -7,10 +7,10 @@
 
 namespace Rodzeta\Redirect;
 
-const ID = "rodzeta.redirect";
-const APP = __DIR__ . "/";
-const LIB = APP  . "lib/";
-const URL_ADMIN = "/bitrix/admin/" . ID . "/";
+define(__NAMESPACE__ . "\ID", "rodzeta.redirect");
+define(__NAMESPACE__ . "\APP", __DIR__ . "/");
+define(__NAMESPACE__ . "\LIB", APP  . "lib/");
+define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
 
 define(__NAMESPACE__ . "\CONFIG",
 	$_SERVER["DOCUMENT_ROOT"] . "/upload/"
@@ -22,8 +22,9 @@ define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
 
 require LIB . "encoding/php-array.php";
 require LIB . "encoding/csv.php";
-require LIB . "options.php";
+//require LIB . "options.php";
 
+/*
 function StorageInit() {
 	if (!is_dir(CONFIG)) {
 		mkdir(CONFIG, 0700, true);
@@ -68,3 +69,4 @@ function Update($data) {
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
 	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);
 }
+*/
