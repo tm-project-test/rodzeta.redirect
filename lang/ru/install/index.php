@@ -1,8 +1,8 @@
 <?php
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
-$MESS["RODZETA_REDIRECT_MODULE_NAME"] = "Ð ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹ Ð¸Ð· csv-Ñ„Ð°Ð¹Ð»Ð° Ð´Ð»Ñ SEO";
-$MESS["RODZETA_REDIRECT_MODULE_DESCRIPTION"] = "Ð ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹ ÑÐ¾ ÑÑ‚Ð°Ñ€Ñ‹Ñ… ÑƒÑ€Ð» Ð½Ð° Ð½Ð¾Ð²Ñ‹Ðµ";
+$MESS["RODZETA_REDIRECT_MODULE_NAME"] = "Ðåäèðåêòû èç csv-ôàéëà äëÿ SEO";
+$MESS["RODZETA_REDIRECT_MODULE_DESCRIPTION"] = "Ðåäèðåêòû ñî ñòàðûõ óðë íà íîâûå";
 
-$MESS["RODZETA_REQUIREMENTS_PHP_VERSION"] = "ÐÐµÐ¾Ð±Ñ…Ð¾Ð´Ð¸Ð¼Ð° Ð²ÐµÑ€ÑÐ¸Ñ PHP 7 Ð¸Ð»Ð¸ Ð²Ñ‹ÑˆÐµ";
-$MESS["RODZETA_REQUIREMENTS_BITRIX_UTF8"] = "Bitrix Ð´Ð¾Ð»Ð¶ÐµÐ½ Ð±Ñ‹Ñ‚ÑŒ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð»ÐµÐ½ Ð² ÐºÐ¾Ð´Ð¸Ñ€Ð¾Ð²ÐºÐµ UTF-8";
+$MESS["RODZETA_REQUIREMENTS_PHP_VERSION"] = "Íåîáõîäèìà âåðñèÿ PHP 7 èëè âûøå";
+$MESS["RODZETA_REQUIREMENTS_BITRIX_UTF8"] = "Bitrix äîëæåí áûòü óñòàíîâëåí â êîäèðîâêå UTF-8";

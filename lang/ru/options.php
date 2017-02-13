@@ -1,9 +1,9 @@
 <?php
 defined('B_PROLOG_INCLUDED') and (B_PROLOG_INCLUDED === true) or die();
 
-$MESS["RODZETA_REDIRECT_MAIN_TAB_SET"] = "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸";
-$MESS["RODZETA_REDIRECT_MAIN_TAB_TITLE_SET"] = "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð¾Ð² Ð¼Ð¾Ð´ÑƒÐ»Ñ";
-$MESS["RODZETA_REDIRECT_URLS_TAB_SET"] = "Ð ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹";
-$MESS["RODZETA_REDIRECT_URLS_TAB_TITLE_SET"] = "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð² (Ñ„Ð°Ð¹Ð» #FILE#)";
-$MESS["RODZETA_REDIRECT_OPTIONS_SAVED"] = "ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ¸ ÑÐ¾Ñ…Ñ€Ð°Ð½ÐµÐ½Ñ‹";
-$MESS["RODZETA_REDIRECT_OPTIONS_RESETED"] = "ÐšÐµÑˆ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð² Ð¾Ñ‡Ð¸Ñ‰ÐµÐ½";
+$MESS["RODZETA_REDIRECT_MAIN_TAB_SET"] = "Íàñòðîéêè";
+$MESS["RODZETA_REDIRECT_MAIN_TAB_TITLE_SET"] = "Íàñòðîéêà ïàðàìåòðîâ ìîäóëÿ";
+$MESS["RODZETA_REDIRECT_URLS_TAB_SET"] = "Ðåäèðåêòû";
+$MESS["RODZETA_REDIRECT_URLS_TAB_TITLE_SET"] = "Ñïèñîê ðåäèðåêòîâ (ôàéë #FILE#)";
+$MESS["RODZETA_REDIRECT_OPTIONS_SAVED"] = "Íàñòðîéêè ñîõðàíåíû";
+$MESS["RODZETA_REDIRECT_OPTIONS_RESETED"] = "Êåø ðåäèðåêòîâ î÷èùåí";

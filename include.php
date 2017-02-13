@@ -16,7 +16,7 @@ require __DIR__ . "/.init.php";
 
 EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
 	global $USER, $APPLICATION;
-	// TODO Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð½Ð° Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸ÑŽ ÐºÐ¾Ð½ÐµÐ½Ñ‚Ð°
+	// TODO çàìåíèòü íà îïðåäåëåíèå äîñòóïà ê ðåäàêòèðîâàíèþ êîíåíòà
 	if (!$USER->IsAdmin()) {
 	  return;
 	}
@@ -36,8 +36,8 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 		"HREF" => $link,
 		"ICON"  => "bx-panel-site-structure-icon",
 		//"SRC" => URL_ADMIN . "/icon.gif",
-		"TEXT"  => "Ð¢Ð¸Ð¿Ð¾Ð²Ñ‹Ðµ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹",
-		"ALT" => "Ð¢Ð¸Ð¿Ð¾Ð²Ñ‹Ðµ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹",
+		"TEXT"  => "Òèïîâûå ðåäèðåêòû",
+		"ALT" => "Òèïîâûå ðåäèðåêòû",
 		"MAIN_SORT" => 2000,
 		"SORT"      => 200
 	));
@@ -57,8 +57,8 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 		"HREF" => $link,
 		"ICON"  => "bx-panel-site-structure-icon",
 		//"SRC" => URL_ADMIN . "/icon.gif",
-		"TEXT"  => "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð²",
-		"ALT" => "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð²",
+		"TEXT"  => "Ñïèñîê ðåäèðåêòîâ",
+		"ALT" => "Ñïèñîê ðåäèðåêòîâ",
 		"MAIN_SORT" => 2000,
 		"SORT"      => 220
 	));

@@ -12,7 +12,7 @@ use Bitrix\Main\{Application, Localization\Loc};
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
 //require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php";
 
-// TODO Р·Р°РјРµРЅРёС‚СЊ РЅР° РѕРїСЂРµРґРµР»РµРЅРёРµ РґРѕСЃС‚СѓРїР° Рє СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЋ РєРѕРЅС‚РµРЅС‚Р°
+// TODO заменить на определение доступа к редактированию контента
 // 	if (!$USER->CanDoOperation("rodzeta.siteoptions"))
 if (!$GLOBALS["USER"]->IsAdmin()) {
 	//$APPLICATION->authForm("ACCESS DENIED");
@@ -41,13 +41,13 @@ $currentOptions = Options\Select();
 <form action="" method="post">
 	<?= bitrix_sessid_post() ?>
 
-	<div class="adm-detail-title">РќР°СЃС‚СЂРѕР№РєР° С‚РёРїРѕРІС‹С… СЂРµРґРёСЂРµРєС‚РѕРІ</div>
+	<div class="adm-detail-title">Настройка типовых редиректов</div>
 
 	<table width="100%">
 		<tbody>
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Р РµРґРёСЂРµРєС‚ СЃ www РЅР° Р±РµР· www,<br>
+					<label>Редирект с www на без www,<br>
 						<b>www.</b>example.org -> example.org</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
@@ -58,30 +58,30 @@ $currentOptions = Options\Select();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Р РµРґРёСЂРµРєС‚ http <-> https,<br>
+					<label>Редирект http <-> https,<br>
 					 <b>http</b>://example.org <-> <b>https</b>://example.org</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<label>
 						<input name="redirect_https" value="" type="radio"
-							<?= $currentOptions["redirect_https"] == ""? "checked" : "" ?>> РЅРµ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ
+							<?= $currentOptions["redirect_https"] == ""? "checked" : "" ?>> не использовать
 					</label>
 					<br>
 					<label>
 						<input name="redirect_https" value="to_https" type="radio"
-							<?= $currentOptions["redirect_https"] == "to_https"? "checked" : "" ?>> РЅР° https://*
+							<?= $currentOptions["redirect_https"] == "to_https"? "checked" : "" ?>> на https://*
 					</label>
 					<br>
 					<label>
 						<input name="redirect_https" value="to_http" type="radio"
-							<?= $currentOptions["redirect_https"] == "to_http"? "checked" : "" ?>> РЅР° http://*
+							<?= $currentOptions["redirect_https"] == "to_http"? "checked" : "" ?>> на http://*
 					</label>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Р РµРґРёСЂРµРєС‚ СЃРѕ СЃС‚СЂР°РЅРёС† Р±РµР· СЃР»РµС€Р° РЅР° СЃР»РµС€,<br>
+					<label>Редирект со страниц без слеша на слеш,<br>
 					 /catalog -> <b>/catalog/</b></label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
@@ -92,7 +92,7 @@ $currentOptions = Options\Select();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Р РµРґРёСЂРµРєС‚ СЃРѕ СЃС‚СЂР°РЅРёС† <b>*/index.php</b> РЅР° <b>*/</b>,<br>
+					<label>Редирект со страниц <b>*/index.php</b> на <b>*/</b>,<br>
 					 /about/index.php -> <b>/about/</b></label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
@@ -103,7 +103,7 @@ $currentOptions = Options\Select();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Р РµРґРёСЂРµРєС‚ СЃ СѓРґР°Р»РµРЅРёРµРј РјРЅРѕР¶РµСЃС‚РІРµРЅРЅС‹С… СЃР»РµС€РµР№,<br>
+					<label>Редирект с удалением множественных слешей,<br>
 					 //news///index.php -> <b>/news/</b></label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
@@ -114,7 +114,7 @@ $currentOptions = Options\Select();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>РСЃРїРѕР»СЊР·РѕРІР°С‚СЊ СЂРµРґРёСЂРµРєС‚С‹ РёР· СЃРїРёСЃРєР°</label>
+					<label>Использовать редиректы из списка</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_urls" value="Y" type="checkbox"
