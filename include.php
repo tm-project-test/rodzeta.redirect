@@ -70,11 +70,7 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		return;
 	}
 
-	if (!empty($_GET["debug"])) {
-		//$currentOptions = \Rodzeta\Redirect\Options\Select();
-	}
-
-	return;
+	$currentOptions = Options\Select();
 
 	$host = $_SERVER["SERVER_NAME"];
 	$protocol = !empty($_SERVER["HTTPS"])
