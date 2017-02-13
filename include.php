@@ -110,11 +110,12 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 			}
 		}
 		if ($currentOptions["redirect_slash"] == "Y") {
+			$tmp = basename(rtrim($u["path"], "/"));
 			// add slash to url
 			if (substr($u["path"], -1, 1) != "/"
-					&& substr(basename(rtrim($u["path"], "/")), -4) != ".php"
-					&& substr(basename(rtrim($u["path"], "/")), -4) != ".htm"
-					&& substr(basename(rtrim($u["path"], "/")), -5) != ".html") {
+					&& substr($tmp, -4) != ".php"
+					&& substr($tmp, -4) != ".htm"
+					&& substr($tmp, -5) != ".html") {
 				$u["path"] .= "/";
 				$changed = true;
 			}
