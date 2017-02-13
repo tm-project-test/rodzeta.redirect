@@ -7,7 +7,8 @@
 
 namespace Rodzeta\Redirect;
 
-use Bitrix\Main\{Application, Localization\Loc};
+use Bitrix\Main\Application;
+use Bitrix\Main\Localization\Loc;
 
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
 //require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php";
@@ -43,7 +44,7 @@ $currentOptions = Select(true);
 		<tbody>
 			<?php
 			$i = 0;
-			foreach (AppendValues($currentOptions, 5, ["", "", ""]) as $url) {
+			foreach (AppendValues($currentOptions, 5, array("", "", "")) as $url) {
 				$i++;
 			?>
 				<tr data-idx="<?= $i ?>">
