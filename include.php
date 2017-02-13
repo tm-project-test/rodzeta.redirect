@@ -9,7 +9,8 @@ namespace Rodzeta\Redirect;
 
 defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
 
-use Bitrix\Main\{Loader, EventManager};
+use Bitrix\Main\Loader;
+use Bitrix\Main\EventManager;
 
 require __DIR__ . "/.init.php";
 
@@ -20,18 +21,18 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 	  return;
 	}
 
-	$link = "javascript:" . $APPLICATION->GetPopupLink([
+	$link = "javascript:" . $APPLICATION->GetPopupLink(array(
 		"URL" => URL_ADMIN,
-		"PARAMS" => [
+		"PARAMS" => array(
 			"resizable" => true,
 			//"width" => 780,
 			//"height" => 570,
 			//"min_width" => 400,
 			//"min_height" => 200,
 			"buttons" => "[BX.CDialog.prototype.btnClose]"
-		]
-	]);
-  $APPLICATION->AddPanelButton([
+		)
+	));
+  $APPLICATION->AddPanelButton(array(
 		"HREF" => $link,
 		"ICON"  => "bx-panel-site-structure-icon",
 		//"SRC" => URL_ADMIN . "/icon.gif",
@@ -39,20 +40,20 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 		"ALT" => "Типовые редиректы",
 		"MAIN_SORT" => 2000,
 		"SORT"      => 200
-	]);
+	));
 
-	$link = "javascript:" . $APPLICATION->GetPopupLink([
+	$link = "javascript:" . $APPLICATION->GetPopupLink(array(
 		"URL" => URL_ADMIN . "/urls/",
-		"PARAMS" => [
+		"PARAMS" => array(
 			"resizable" => true,
 			//"width" => 780,
 			//"height" => 570,
 			//"min_width" => 400,
 			//"min_height" => 200,
 			"buttons" => "[BX.CDialog.prototype.btnClose]"
-		]
-	]);
-  $APPLICATION->AddPanelButton([
+		)
+	));
+  $APPLICATION->AddPanelButton(array(
 		"HREF" => $link,
 		"ICON"  => "bx-panel-site-structure-icon",
 		//"SRC" => URL_ADMIN . "/icon.gif",
@@ -60,7 +61,7 @@ EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function (
 		"ALT" => "Список редиректов",
 		"MAIN_SORT" => 2000,
 		"SORT"      => 220
-	]);
+	));
 });
 
 EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {

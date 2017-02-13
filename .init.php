@@ -31,26 +31,32 @@ function StorageInit() {
 }
 
 function AppendValues($data, $n, $v) {
-	yield from $data;
-	for ($i = 0; $i < $n; $i++) {
-		yield  $v;
+	//yield from $data;
+	$result = array();
+	foreach ($data as $v) {
+		$result[] = $v;
 	}
+	for ($i = 0; $i < $n; $i++) {
+		//yield  $v;
+		$result[] = $v;
+	}
+	return $result;
 }
 
 function Select($fromCsv = false) {
-	$result = [];
+	$result = array();
 	if ($fromCsv) {
 		$result = \Encoding\Csv\Read(FILE_REDIRECTS);
 	} else {
 		$result = is_readable(FILE_REDIRECTS_CACHE)?
-			include FILE_REDIRECTS_CACHE : [];
+			include FILE_REDIRECTS_CACHE : array();
 	}
 	return $result;
 }
 
 function Update($data) {
-	$urls = [];
-	$urlsMap = [];
+	$urls = array();
+	$urlsMap = array();
 	foreach ($data["redirect_urls"] as $url) {
 		$from = trim($url[0]);
 		$to = trim($url[1]);
