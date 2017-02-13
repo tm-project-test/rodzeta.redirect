@@ -22,7 +22,7 @@ define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
 
 require LIB . "encoding/php-array.php";
 require LIB . "encoding/csv.php";
-//require LIB . "options.php";
+require LIB . "options.php";
 
 /*
 function StorageInit() {
