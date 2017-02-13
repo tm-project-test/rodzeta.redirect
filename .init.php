@@ -24,7 +24,6 @@ require LIB . "encoding/php-array.php";
 require LIB . "encoding/csv.php";
 require LIB . "options.php";
 
-/*
 function StorageInit() {
 	if (!is_dir(CONFIG)) {
 		mkdir(CONFIG, 0700, true);
@@ -63,10 +62,9 @@ function Update($data) {
 		$to = trim($url[1]);
 		if ($from != "" && $to != "") {
 			$urls[] = $url;
-			$urlsMap[$from] = [$to, trim($url[2])];
+			$urlsMap[$from] = array($to, trim($url[2]));
 		}
 	}
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
 	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);
 }
-*/
