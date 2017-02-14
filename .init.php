@@ -19,6 +19,7 @@ define(__NAMESPACE__ . "\CONFIG",
 	. "/." . ID . "/");
 define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".urls.csv");
 define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
+define(__NAMESPACE__ . "\FILE_REDIRECTS_DOMAINS", CONFIG . ".domains.php");
 
 require LIB . "encoding/php-array.php";
 require LIB . "encoding/csv.php";
@@ -67,4 +68,10 @@ function Update($data) {
 	}
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
 	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);
+}
+
+function SelectDomains() {
+	return is_readable(FILE_REDIRECTS_DOMAINS)?
+		include FILE_REDIRECTS_DOMAINS
+		: array();
 }

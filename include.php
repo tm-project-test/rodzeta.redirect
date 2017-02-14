@@ -147,6 +147,15 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	$status = $status == "302"?
 		"302 Found" : "301 Moved Permanently";
 
+	// FIX for host redirects
+	$domainRedirects = SelectDomains();
+	if (!empty($domainRedirects[$host])) {
+		$host = $domainRedirects[$host];
+		if (empty($url)) {
+			$url = $_SERVER["REQUEST_URI"];
+		}
+	}
+
 	if (!empty($url)) {
 		if ($isAbsoluteUrl) {
 			LocalRedirect($url, true, $status);
