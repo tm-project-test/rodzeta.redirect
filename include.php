@@ -165,3 +165,26 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 		exit;
 	}
 });
+
+// FIX change defined real urls to rewrited urls
+EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
+	function (&$content) {
+		if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
+				|| \CSite::InDir("/bitrix/")) {
+			return;
+		}
+
+		global $CUSTOM_SEO_REWRITE_URLS;
+		if (empty($CUSTOM_SEO_REWRITE_URLS)) {
+			return;
+		}
+
+		return;
+
+		$content = str_replace(
+			array_values($CUSTOM_SEO_REWRITE_URLS),
+			array_keys($CUSTOM_SEO_REWRITE_URLS),
+			$content
+		);
+	}
+);
