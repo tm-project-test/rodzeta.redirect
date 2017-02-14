@@ -166,6 +166,48 @@ EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function 
 	}
 });
 
+function ReplaceUrls($m) {
+	if (strpos($m[1], 'href=') === false) {
+		return $m[0];
+	}
+	if (strpos($m[1], 'data-fixed=') !== false) {
+		return $m[0];
+	}
+	if (!preg_match('{href=[\'\"]+(.+?)[\'\"]+}i', $m[1], $mattrs)) {
+		return $m[0];
+	}
+
+	// if is internal link
+	if ((strpos($mattrs[1], 'http://') === false
+				&& strpos($mattrs[1], 'https://') === false) ||
+			strpos($mattrs[1], $_SERVER['SERVER_NAME']) !== false ||
+			strpos($mattrs[1], 'www.' . $_SERVER['SERVER_NAME']) !== false) {
+		$url = $mattrs[1];
+		// fix link
+		$u = parse_url($url);
+		$newUrl = $url;
+		if ($u['path'] != '' && $u['path'] != '/' &&
+				substr($u['path'], -1) != '/' &&
+				($u['scheme'] == '' || $u['scheme'] == 'http' || $u['scheme'] == 'https')) {
+			$p = pathinfo($u['path']);
+			if (empty($p['extension'])) {
+				$newUrl = $url . '/';
+				$m[0] = str_replace($url, $newUrl, $m[0]);
+				//echo '<!-- ' . $u['path'] . ' - ' . print_r($p, true) . ' -->' . PHP_EOL;
+			}
+		}
+		// rewrite url
+		global $CUSTOM_SEO_REWRITE_URLS;
+		if (!empty($CUSTOM_SEO_REWRITE_URLS)) {
+			if (isset($CUSTOM_SEO_REWRITE_URLS[$newUrl])) {
+				$m[0] = str_replace($newUrl, $CUSTOM_SEO_REWRITE_URLS[$newUrl], $m[0]);
+			}
+		}
+	}
+
+	return $m[0];
+}
+
 // FIX change defined real urls to rewrited urls
 EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 	function (&$content) {
@@ -178,12 +220,11 @@ EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 		if (empty($CUSTOM_SEO_REWRITE_URLS)) {
 			return;
 		}
-
-		return;
-
-		$content = str_replace(
-			array_values($CUSTOM_SEO_REWRITE_URLS),
-			array_keys($CUSTOM_SEO_REWRITE_URLS),
+		//return;
+		$CUSTOM_SEO_REWRITE_URLS = array_flip($CUSTOM_SEO_REWRITE_URLS);
+		$content = preg_replace_callback(
+			'{<a([^>]*)>}is',
+			__NAMESPACE__ . '\ReplaceUrls',
 			$content
 		);
 	}
