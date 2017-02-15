@@ -197,10 +197,10 @@ function ReplaceUrls($m) {
 			}
 		}
 		// rewrite url
-		global $CUSTOM_SEO_REWRITE_URLS;
-		if (!empty($CUSTOM_SEO_REWRITE_URLS)) {
-			if (isset($CUSTOM_SEO_REWRITE_URLS[$newUrl])) {
-				$m[0] = str_replace($newUrl, $CUSTOM_SEO_REWRITE_URLS[$newUrl], $m[0]);
+		global $CUSTOM_SEO_REWRITE_URLS_REPLACE;
+		if (!empty($CUSTOM_SEO_REWRITE_URLS_REPLACE)) {
+			if (isset($CUSTOM_SEO_REWRITE_URLS_REPLACE[$newUrl])) {
+				$m[0] = str_replace($newUrl, $CUSTOM_SEO_REWRITE_URLS_REPLACE[$newUrl], $m[0]);
 			}
 		}
 	}
@@ -216,12 +216,12 @@ EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 			return;
 		}
 
-		global $CUSTOM_SEO_REWRITE_URLS;
-		if (empty($CUSTOM_SEO_REWRITE_URLS)) {
+		global $CUSTOM_SEO_REWRITE_URLS_REPLACE;
+		if (empty($CUSTOM_SEO_REWRITE_URLS_REPLACE)) {
 			return;
 		}
 		//return;
-		$CUSTOM_SEO_REWRITE_URLS = array_flip($CUSTOM_SEO_REWRITE_URLS);
+		$CUSTOM_SEO_REWRITE_URLS_REPLACE = array_flip($CUSTOM_SEO_REWRITE_URLS_REPLACE);
 		$content = preg_replace_callback(
 			'{<a([^>]*)>}is',
 			__NAMESPACE__ . '\ReplaceUrls',
