@@ -218,7 +218,7 @@ EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 
 		global $USER, $APPLICATION;
 		// TODO заменить на определение доступа к редактированию конента
-		if (!$USER->IsAdmin()) {
+		if ($USER->IsAdmin()) {
 		  return;
 		}
 		if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
