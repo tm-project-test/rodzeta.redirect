@@ -173,6 +173,9 @@ function ReplaceUrls($m) {
 	if (strpos($m[1], 'data-fixed=') !== false) {
 		return $m[0];
 	}
+	if (strpos($m[1], 'href=""') !== false || strpos($m[1], "href=''") !== false) {
+		return $m[0];
+	}
 	if (!preg_match('{href=[\'\"]+(.+?)[\'\"]+}i', $m[1], $mattrs)) {
 		return $m[0];
 	}
@@ -211,6 +214,13 @@ function ReplaceUrls($m) {
 // FIX change defined real urls to rewrited urls
 EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 	function (&$content) {
+		//return;
+
+		global $USER, $APPLICATION;
+		// TODO заменить на определение доступа к редактированию конента
+		if (!$USER->IsAdmin()) {
+		  return;
+		}
 		if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
 				|| \CSite::InDir("/bitrix/")) {
 			return;
