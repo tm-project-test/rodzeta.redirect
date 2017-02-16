@@ -216,10 +216,9 @@ EventManager::getInstance()->addEventHandler("main", "OnEndBufferContent",
 	function (&$content) {
 		//return;
 
-		global $USER, $APPLICATION;
-		// TODO заменить на определение доступа к редактированию конента
-		if ($USER->IsAdmin()) {
-		  return;
+		global $APPLICATION;
+		if ($APPLICATION->showPanelWasInvoked) { // ignore for admin panel
+			return;
 		}
 		if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
 				|| \CSite::InDir("/bitrix/")) {
