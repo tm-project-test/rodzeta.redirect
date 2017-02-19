@@ -13,12 +13,12 @@
 
 ## Описание техподдержки и контактных данных
 
-Тех. поддержка и кастомизация оказывается на платной основе, e-mail: rivetweb@yandex.ru
+Тех. поддержка и кастомизация оказывается на платной основе, запросы только по [e-mail](mailto:rivetweb@yandex.ru)
 
-Багрепорты и предложения на https://github.com/rivetweb/bitrix-rodzeta.redirect/issues
+[Багрепорты и предложения](https://github.com/rivetweb/rodzeta.redirect/issues)
 
-Пул реквесты на https://github.com/rivetweb/bitrix-rodzeta.redirect/pulls
+[Пул реквесты](https://github.com/rivetweb/rodzeta.redirect/pulls)
 
 ## Ссылка на демо-версию
 
-http://rodzeta.ru/
+[http://rodzeta.ru/](http://rodzeta.ru/)
