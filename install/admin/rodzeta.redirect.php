@@ -1,3 +1,3 @@
 <?php
 
-require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/rodzeta.redirect/admin/rodzeta.redirect/index.php";
+require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/rodzeta.redirect/admin/rodzeta.redirect.php";
