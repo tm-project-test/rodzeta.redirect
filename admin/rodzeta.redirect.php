@@ -40,14 +40,17 @@ $currentOptions = Options();
 <form action="" method="post">
 	<?= bitrix_sessid_post() ?>
 
-	<div class="adm-detail-title">Настройка типовых редиректов</div>
+	<div class="adm-detail-title">
+		<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_TITLE") ?>
+	</div>
 
 	<table width="100%">
 		<tbody>
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Редирект с www на без www,<br>
-						<b>www.</b>example.org -> example.org</label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_WWW_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_www" value="Y" type="checkbox"
@@ -57,31 +60,36 @@ $currentOptions = Options();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Редирект http <-> https,<br>
-					 <b>http</b>://example.org <-> <b>https</b>://example.org</label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_HTTPS_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<label>
 						<input name="redirect_https" value="" type="radio"
-							<?= $currentOptions["redirect_https"] == ""? "checked" : "" ?>> не использовать
+							<?= $currentOptions["redirect_https"] == ""? "checked" : "" ?>>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_HTTPS_NO") ?>
 					</label>
 					<br>
 					<label>
 						<input name="redirect_https" value="to_https" type="radio"
-							<?= $currentOptions["redirect_https"] == "to_https"? "checked" : "" ?>> на https://*
+							<?= $currentOptions["redirect_https"] == "to_https"? "checked" : "" ?>>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_HTTPS_HTTPS") ?>
 					</label>
 					<br>
 					<label>
 						<input name="redirect_https" value="to_http" type="radio"
-							<?= $currentOptions["redirect_https"] == "to_http"? "checked" : "" ?>> на http://*
+							<?= $currentOptions["redirect_https"] == "to_http"? "checked" : "" ?>>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_HTTPS_HTTP") ?>
 					</label>
 				</td>
 			</tr>
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Редирект со страниц без слеша на слеш,<br>
-					 /catalog -> <b>/catalog/</b></label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_SLASH_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_slash" value="Y" type="checkbox"
@@ -91,8 +99,9 @@ $currentOptions = Options();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Редирект со страниц <b>*/index.php</b> на <b>*/</b>,<br>
-					 /about/index.php -> <b>/about/</b></label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_INDEX_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_index" value="Y" type="checkbox"
@@ -102,8 +111,9 @@ $currentOptions = Options();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Редирект с удалением множественных слешей,<br>
-					 //news///index.php -> <b>/news/</b></label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_MULTISLASH_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_multislash" value="Y" type="checkbox"
@@ -113,7 +123,9 @@ $currentOptions = Options();
 
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
-					<label>Использовать редиректы из списка</label>
+					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_URLS_TITLE") ?>
+					</label>
 				</td>
 				<td class="adm-detail-content-cell-r" width="50%">
 					<input name="redirect_urls" value="Y" type="checkbox"
