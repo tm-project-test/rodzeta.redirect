@@ -23,7 +23,7 @@ function init() {
 		}
 
 		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-			"URL" => URL_ADMIN,
+			"URL" => URL_ADMIN . ".php",
 			"PARAMS" => array(
 				"resizable" => true,
 				//"width" => 780,
@@ -44,7 +44,7 @@ function init() {
 		));
 
 		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-			"URL" => URL_ADMIN . "/urls/",
+			"URL" => URL_ADMIN . ".urls.php",
 			"PARAMS" => array(
 				"resizable" => true,
 				//"width" => 780,
