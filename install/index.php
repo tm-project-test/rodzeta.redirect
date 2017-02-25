@@ -14,7 +14,6 @@ use Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 
 class rodzeta_redirect extends CModule {
-
 	var $MODULE_ID = "rodzeta.redirect"; // NOTE using "var" for bitrix rules
 
 	public $MODULE_VERSION;
@@ -48,21 +47,22 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function InstallFiles() {
-		// TODO copy admin files
-		/*
+		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
+		$modulePath = $_SERVER["DOCUMENT_ROOT"]
+			. "/bitrix/modules/" . $this->MODULE_ID;
 		CopyDirFiles(
-			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/" . $this->MODULE_ID . "/install/admin/" . $this->MODULE_ID,
-			$_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/" . $this->MODULE_ID,
-			true, true
+			$modulePath . "/install/admin/",
+			$path,
+			true,
+			true
 		);
-		*/
-
 		return true;
 	}
 
 	function UninstallFiles() {
-		// TODO remove admin files
-		//DeleteDirFilesEx("/bitrix/admin/" . $this->MODULE_ID);
+		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
+		unlink($path . $this->MODULE_ID . ".php");
+		unlink($path . $this->MODULE_ID . ".urls.php");
 		return true;
 	}
 
@@ -77,5 +77,4 @@ class rodzeta_redirect extends CModule {
 		UnRegisterModuleDependences("main", "OnPageStart", $this->MODULE_ID);
 		UnRegisterModule($this->MODULE_ID);
 	}
-
 }
