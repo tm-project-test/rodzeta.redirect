@@ -8,27 +8,45 @@
 namespace Rodzeta\Redirect;
 
 define(__NAMESPACE__ . "\ID", "rodzeta.redirect");
-define(__NAMESPACE__ . "\APP", __DIR__ . "/");
+define(__NAMESPACE__ . "\APP", dirname(__DIR__) . "/");
 define(__NAMESPACE__ . "\LIB", APP  . "lib/");
-define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID . "/");
+define(__NAMESPACE__ . "\URL_ADMIN", "/bitrix/admin/" . ID);
 
+define(__NAMESPACE__ . "\SITE", substr($_SERVER["SERVER_NAME"], 0, 4) == "www."?
+	substr($_SERVER["SERVER_NAME"], 4) : $_SERVER["SERVER_NAME"]);
 define(__NAMESPACE__ . "\CONFIG",
-	$_SERVER["DOCUMENT_ROOT"] . "/upload/"
-	. (substr($_SERVER["SERVER_NAME"], 0, 4) == "www."?
-			substr($_SERVER["SERVER_NAME"], 4) : $_SERVER["SERVER_NAME"])
-	. "/." . ID . "/");
+	$_SERVER["DOCUMENT_ROOT"] . "/upload/." . ID . "." . SITE);
+
+define(__NAMESPACE__ . "\FILE_OPTIONS", CONFIG . ".php");
 define(__NAMESPACE__ . "\FILE_REDIRECTS", CONFIG . ".urls.csv");
 define(__NAMESPACE__ . "\FILE_REDIRECTS_CACHE", CONFIG . ".urls.php");
 define(__NAMESPACE__ . "\FILE_REDIRECTS_DOMAINS", CONFIG . ".domains.php");
 
 require LIB . "encoding/php-array.php";
 require LIB . "encoding/csv.php";
-require LIB . "options.php";
 
-function StorageInit() {
-	if (!is_dir(CONFIG)) {
-		mkdir(CONFIG, 0700, true);
-	}
+function Options() {
+	$result = is_readable(FILE_OPTIONS)?
+		include FILE_OPTIONS
+		: array(
+			"redirect_www" => "Y",
+			"redirect_https" => "",
+			"redirect_slash" => "Y",
+			"redirect_index" => "Y",
+			"redirect_urls" => "N",
+		);
+	return $result;
+}
+
+function OptionsUpdate($data) {
+	\Encoding\PhpArray\Write(FILE_OPTIONS, array(
+		"redirect_www" => $data["redirect_www"],
+		"redirect_https" => $data["redirect_https"],
+		"redirect_slash" => $data["redirect_slash"],
+		"redirect_index" => $data["redirect_index"],
+		"redirect_multislash" => $data["redirect_multislash"],
+		"redirect_urls" => $data["redirect_urls"],
+	));
 }
 
 function AppendValues($data, $n, $v) {
@@ -70,7 +88,7 @@ function Update($data) {
 	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);
 }
 
-function SelectDomains() {
+function Domains() {
 	return is_readable(FILE_REDIRECTS_DOMAINS)?
 		include FILE_REDIRECTS_DOMAINS
 		: array();

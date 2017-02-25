@@ -13,7 +13,7 @@ use Bitrix\Main\Localization\Loc;
 require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_admin_before.php";
 //require $_SERVER["DOCUMENT_ROOT"] . "/bitrix/modules/main/include/prolog_before.php";
 
-// TODO çàìåíèòü íà îïðåäåëåíèå äîñòóïà ê ðåäàêòèðîâàíèþ êîíòåíòà
+// TODO Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð½Ð° Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸ÑŽ ÐºÐ¾Ð½Ñ‚ÐµÐ½Ñ‚Ð°
 // 	if (!$USER->CanDoOperation("rodzeta.siteoptions"))
 if (!$GLOBALS["USER"]->IsAdmin()) {
 	//$APPLICATION->authForm("ACCESS DENIED");
@@ -25,8 +25,6 @@ Loc::loadMessages(__FILE__);
 $app = Application::getInstance();
 $context = $app->getContext();
 $request = $context->getRequest();
-
-StorageInit();
 
 $formSaved = check_bitrix_sessid() && $request->isPost();
 if ($formSaved) {
@@ -49,19 +47,19 @@ $currentOptions = Select(true);
 			?>
 				<tr data-idx="<?= $i ?>">
 					<td>
-						<input type="text" placeholder="Îòêóäà"
+						<input type="text" placeholder="ÐžÑ‚ÐºÑƒÐ´Ð°"
 							name="redirect_urls[<?= $i ?>][0]"
 							value="<?= htmlspecialcharsex($url[0]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<input type="text" placeholder="Êóäà"
+						<input type="text" placeholder="ÐšÑƒÐ´Ð°"
 							name="redirect_urls[<?= $i ?>][1]"
 							value="<?= htmlspecialcharsex($url[1]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<select name="redirect_urls[<?= $i ?>][2]" title="Ñòàòóñ" style="width:96%;">
+						<select name="redirect_urls[<?= $i ?>][2]" title="Ð¡Ñ‚Ð°Ñ‚ÑƒÑ" style="width:96%;">
 							<option value="301" <?= $url[2] == "301"? "selected" : "" ?>>301</option>
 							<option value="302" <?= $url[2] == "302"? "selected" : "" ?>>302</option>
 						</select>

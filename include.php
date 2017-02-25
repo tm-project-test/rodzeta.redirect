@@ -7,161 +7,167 @@
 
 namespace Rodzeta\Redirect;
 
-defined("B_PROLOG_INCLUDED") and (B_PROLOG_INCLUDED === true) or die();
+if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\EventManager;
 
-require __DIR__ . "/.init.php";
+require __DIR__ . "/lib/.init.php";
 
-EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
-	global $USER, $APPLICATION;
-	// TODO çàìåíèòü íà îïðåäåëåíèå äîñòóïà ê ðåäàêòèðîâàíèþ êîíåíòà
-	if (!$USER->IsAdmin()) {
-	  return;
-	}
-
-	$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-		"URL" => URL_ADMIN,
-		"PARAMS" => array(
-			"resizable" => true,
-			//"width" => 780,
-			//"height" => 570,
-			//"min_width" => 400,
-			//"min_height" => 200,
-			"buttons" => "[BX.CDialog.prototype.btnClose]"
-		)
-	));
-  $APPLICATION->AddPanelButton(array(
-		"HREF" => $link,
-		"ICON"  => "bx-panel-site-structure-icon",
-		//"SRC" => URL_ADMIN . "/icon.gif",
-		"TEXT"  => "Òèïîâûå ðåäèðåêòû",
-		"ALT" => "Òèïîâûå ðåäèðåêòû",
-		"MAIN_SORT" => 2000,
-		"SORT"      => 200
-	));
-
-	$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-		"URL" => URL_ADMIN . "/urls/",
-		"PARAMS" => array(
-			"resizable" => true,
-			//"width" => 780,
-			//"height" => 570,
-			//"min_width" => 400,
-			//"min_height" => 200,
-			"buttons" => "[BX.CDialog.prototype.btnClose]"
-		)
-	));
-  $APPLICATION->AddPanelButton(array(
-		"HREF" => $link,
-		"ICON"  => "bx-panel-site-structure-icon",
-		//"SRC" => URL_ADMIN . "/icon.gif",
-		"TEXT"  => "Ñïèñîê ðåäèðåêòîâ",
-		"ALT" => "Ñïèñîê ðåäèðåêòîâ",
-		"MAIN_SORT" => 2000,
-		"SORT"      => 220
-	));
-});
-
-EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
-	if (($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD")
-			|| \CSite::InDir("/bitrix/")) {
-		return;
-	}
-
-	$currentOptions = Options\Select();
-
-	$host = $_SERVER["SERVER_NAME"];
-	$protocol = !empty($_SERVER["HTTPS"])
-		&& $_SERVER["HTTPS"] != "off"? "https" : "http";
-	$port = !empty($_SERVER["SERVER_PORT"])
-		&& $_SERVER["SERVER_PORT"] != "80"
-		&& $_SERVER["SERVER_PORT"] != "443"?
-			(":" . $_SERVER["SERVER_PORT"]) : "";
-	$url = null;
-	$isAbsoluteUrl = false;
-
-	if ($currentOptions["redirect_www"] == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
-		$host = substr($_SERVER["SERVER_NAME"], 4);
-		$url = $_SERVER["REQUEST_URI"];
-	}
-
-	$toProtocol = $currentOptions["redirect_https"];
-	if ($toProtocol == "to_https" && $protocol == "http") {
-		$protocol = "https";
-		$url = $_SERVER["REQUEST_URI"];
-	} else if ($toProtocol == "to_http" && $protocol == "https") {
-		$protocol = "http";
-		$url = $_SERVER["REQUEST_URI"];
-	}
-
-	if ($currentOptions["redirect_index"] == "Y"
-			|| $currentOptions["redirect_slash"] == "Y"
-			|| $currentOptions["redirect_multislash"] == "Y") {
-		$changed = false;
-		$u = parse_url($_SERVER["REQUEST_URI"]);
-		if ($currentOptions["redirect_index"] == "Y") {
-			$tmp = rtrim($u["path"], "/");
-			if (basename($tmp) == "index.php") {
-				$dname = dirname($tmp);
-				$u["path"] = ($dname != DIRECTORY_SEPARATOR? $dname : "") . "/";
-				$changed = true;
-			}
+function init() {
+	EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
+		global $USER, $APPLICATION;
+		// TODO Ð·Ð°Ð¼ÐµÐ½Ð¸Ñ‚ÑŒ Ð½Ð° Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð¸Ðµ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð° Ðº Ñ€ÐµÐ´Ð°ÐºÑ‚Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸ÑŽ ÐºÐ¾Ð½ÐµÐ½Ñ‚Ð°
+		if (!$USER->IsAdmin()) {
+		  return;
 		}
-		if ($currentOptions["redirect_slash"] == "Y") {
-			$tmp = basename(rtrim($u["path"], "/"));
-			// add slash to url
-			if (substr($u["path"], -1, 1) != "/"
-					&& substr($tmp, -4) != ".php"
-					&& substr($tmp, -4) != ".htm"
-					&& substr($tmp, -5) != ".html") {
-				$u["path"] .= "/";
-				$changed = true;
-			}
-		}
-		if ($currentOptions["redirect_multislash"] == "Y") {
-			if (strpos($u["path"], "//") !== false) {
-				$u["path"] = preg_replace('{/+}s', "/", $u["path"]);
-				$changed = true;
-			}
-		}
-		if ($changed) {
-			$url = $u["path"];
-			if (!empty($u["query"])) {
-				$url .= "?" . $u["query"];
-			}
-		}
-	}
 
-	$status = "";
-	if ($currentOptions["redirect_urls"] == "Y") {
-		$redirects = Select();
-		if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
-			list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
-			if (substr($url, 0, 4) == "http") {
-				$isAbsoluteUrl = true;
-			}
-		}
-	}
-	$status = $status == "302"?
-		"302 Found" : "301 Moved Permanently";
+		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
+			"URL" => URL_ADMIN,
+			"PARAMS" => array(
+				"resizable" => true,
+				//"width" => 780,
+				//"height" => 570,
+				//"min_width" => 400,
+				//"min_height" => 200,
+				"buttons" => "[BX.CDialog.prototype.btnClose]"
+			)
+		));
+	  $APPLICATION->AddPanelButton(array(
+			"HREF" => $link,
+			"ICON"  => "bx-panel-site-structure-icon",
+			//"SRC" => URL_ADMIN . "/icon.gif",
+			"TEXT"  => "Ð¢Ð¸Ð¿Ð¾Ð²Ñ‹Ðµ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹",
+			"ALT" => "Ð¢Ð¸Ð¿Ð¾Ð²Ñ‹Ðµ Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ñ‹",
+			"MAIN_SORT" => 2000,
+			"SORT"      => 200
+		));
 
-	// FIX for host redirects
-	$domainRedirects = SelectDomains();
-	if (!empty($domainRedirects[$host])) {
-		$host = $domainRedirects[$host];
-		if (empty($url)) {
+		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
+			"URL" => URL_ADMIN . "/urls/",
+			"PARAMS" => array(
+				"resizable" => true,
+				//"width" => 780,
+				//"height" => 570,
+				//"min_width" => 400,
+				//"min_height" => 200,
+				"buttons" => "[BX.CDialog.prototype.btnClose]"
+			)
+		));
+	  $APPLICATION->AddPanelButton(array(
+			"HREF" => $link,
+			"ICON"  => "bx-panel-site-structure-icon",
+			//"SRC" => URL_ADMIN . "/icon.gif",
+			"TEXT"  => "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð²",
+			"ALT" => "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ñ€ÐµÐ´Ð¸Ñ€ÐµÐºÑ‚Ð¾Ð²",
+			"MAIN_SORT" => 2000,
+			"SORT"      => 220
+		));
+	});
+
+	EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
+		//if ($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD") {
+		//	return;
+		//}
+		if (\CSite::InDir("/bitrix/")) {
+			return;
+		}
+
+		$currentOptions = Options();
+
+		$host = $_SERVER["SERVER_NAME"];
+		$protocol = !empty($_SERVER["HTTPS"])
+			&& $_SERVER["HTTPS"] != "off"? "https" : "http";
+		$port = !empty($_SERVER["SERVER_PORT"])
+			&& $_SERVER["SERVER_PORT"] != "80"
+			&& $_SERVER["SERVER_PORT"] != "443"?
+				(":" . $_SERVER["SERVER_PORT"]) : "";
+		$url = null;
+		$isAbsoluteUrl = false;
+
+		if ($currentOptions["redirect_www"] == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
+			$host = substr($_SERVER["SERVER_NAME"], 4);
 			$url = $_SERVER["REQUEST_URI"];
 		}
-	}
 
-	if (!empty($url)) {
-		if ($isAbsoluteUrl) {
-			LocalRedirect($url, true, $status);
-		} else {
-			LocalRedirect($protocol . "://" . $host . $port . $url, true, $status);
+		$toProtocol = $currentOptions["redirect_https"];
+		if ($toProtocol == "to_https" && $protocol == "http") {
+			$protocol = "https";
+			$url = $_SERVER["REQUEST_URI"];
+		} else if ($toProtocol == "to_http" && $protocol == "https") {
+			$protocol = "http";
+			$url = $_SERVER["REQUEST_URI"];
 		}
-		exit;
-	}
-});
+
+		if ($currentOptions["redirect_index"] == "Y"
+				|| $currentOptions["redirect_slash"] == "Y"
+				|| $currentOptions["redirect_multislash"] == "Y") {
+			$changed = false;
+			$u = parse_url($_SERVER["REQUEST_URI"]);
+			if ($currentOptions["redirect_index"] == "Y") {
+				$tmp = rtrim($u["path"], "/");
+				if (basename($tmp) == "index.php") {
+					$dname = dirname($tmp);
+					$u["path"] = ($dname != DIRECTORY_SEPARATOR? $dname : "") . "/";
+					$changed = true;
+				}
+			}
+			if ($currentOptions["redirect_slash"] == "Y") {
+				$tmp = basename(rtrim($u["path"], "/"));
+				// add slash to url
+				if (substr($u["path"], -1, 1) != "/"
+						&& substr($tmp, -4) != ".php"
+						&& substr($tmp, -4) != ".htm"
+						&& substr($tmp, -5) != ".html") {
+					$u["path"] .= "/";
+					$changed = true;
+				}
+			}
+			if ($currentOptions["redirect_multislash"] == "Y") {
+				if (strpos($u["path"], "//") !== false) {
+					$u["path"] = preg_replace('{/+}s', "/", $u["path"]);
+					$changed = true;
+				}
+			}
+			if ($changed) {
+				$url = $u["path"];
+				if (!empty($u["query"])) {
+					$url .= "?" . $u["query"];
+				}
+			}
+		}
+
+		$status = "";
+		if ($currentOptions["redirect_urls"] == "Y") {
+			$redirects = Select();
+			if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
+				list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
+				if (substr($url, 0, 4) == "http") {
+					$isAbsoluteUrl = true;
+				}
+			}
+		}
+		$status = $status == "302"?
+			"302 Found" : "301 Moved Permanently";
+
+		// FIX for host redirects
+		$domainRedirects = Domains();
+		if (!empty($domainRedirects[$host])) {
+			$host = $domainRedirects[$host];
+			if (empty($url)) {
+				$url = $_SERVER["REQUEST_URI"];
+			}
+		}
+
+		if (!empty($url)) {
+			if ($isAbsoluteUrl) {
+				LocalRedirect($url, true, $status);
+			} else {
+				LocalRedirect($protocol . "://" . $host . $port . $url, true, $status);
+			}
+			exit;
+		}
+	});
+}
+
+init();
