@@ -47,19 +47,23 @@ $currentOptions = Select(true);
 			?>
 				<tr data-idx="<?= $i ?>">
 					<td>
-						<input type="text" placeholder="Откуда"
+						<input type="text" placeholder="<?=
+								Loc::getMessage("RODZETA_REDIRECT_URLS_FROM") ?>"
 							name="redirect_urls[<?= $i ?>][0]"
 							value="<?= htmlspecialcharsex($url[0]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<input type="text" placeholder="Куда"
+						<input type="text" placeholder="<?=
+								Loc::getMessage("RODZETA_REDIRECT_URLS_TO") ?>"
 							name="redirect_urls[<?= $i ?>][1]"
 							value="<?= htmlspecialcharsex($url[1]) ?>"
 							style="width:96%;">
 					</td>
 					<td>
-						<select name="redirect_urls[<?= $i ?>][2]" title="Статус" style="width:96%;">
+						<select name="redirect_urls[<?= $i ?>][2]"
+								title="<?= Loc::getMessage("RODZETA_REDIRECT_URLS_STATUS") ?>"
+								style="width:96%;">
 							<option value="301" <?= $url[2] == "301"? "selected" : "" ?>>301</option>
 							<option value="302" <?= $url[2] == "302"? "selected" : "" ?>>302</option>
 						</select>
