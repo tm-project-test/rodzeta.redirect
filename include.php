@@ -84,29 +84,32 @@ function init() {
 			&& $_SERVER["SERVER_PORT"] != "80"
 			&& $_SERVER["SERVER_PORT"] != "443"?
 				(":" . $_SERVER["SERVER_PORT"]) : "";
+		$currentUri = $currentOptions["ignore_query"] == "Y"?
+			parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH)
+			: $_SERVER["REQUEST_URI"];
 		$url = null;
 		$isAbsoluteUrl = false;
 
 		if ($currentOptions["redirect_www"] == "Y"
 				&& substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
 			$host = substr($_SERVER["SERVER_NAME"], 4);
-			$url = $_SERVER["REQUEST_URI"];
+			$url = $currentUri;
 		}
 
 		$toProtocol = $currentOptions["redirect_https"];
 		if ($toProtocol == "to_https" && $protocol == "http") {
 			$protocol = "https";
-			$url = $_SERVER["REQUEST_URI"];
+			$url = $currentUri;
 		} else if ($toProtocol == "to_http" && $protocol == "https") {
 			$protocol = "http";
-			$url = $_SERVER["REQUEST_URI"];
+			$url = $currentUri;
 		}
 
 		if ($currentOptions["redirect_index"] == "Y"
 				|| $currentOptions["redirect_slash"] == "Y"
 				|| $currentOptions["redirect_multislash"] == "Y") {
 			$changed = false;
-			$u = parse_url($_SERVER["REQUEST_URI"]);
+			$u = parse_url($currentUri);
 			if ($currentOptions["redirect_index"] == "Y") {
 				$tmp = rtrim($u["path"], "/");
 				if (basename($tmp) == "index.php") {
@@ -143,8 +146,8 @@ function init() {
 		$status = "";
 		if ($currentOptions["redirect_urls"] == "Y") {
 			$redirects = Select();
-			if (isset($redirects[$_SERVER["REQUEST_URI"]])) {
-				list($url, $status) = $redirects[$_SERVER["REQUEST_URI"]];
+			if (isset($redirects[$currentUri])) {
+				list($url, $status) = $redirects[$currentUri];
 				if (substr($url, 0, 4) == "http") {
 					$isAbsoluteUrl = true;
 				}
@@ -153,12 +156,12 @@ function init() {
 		$status = $status == "302"?
 			"302 Found" : "301 Moved Permanently";
 
-		// FIX for host redirects
+		// host redirects
 		$domainRedirects = Domains();
 		if (!empty($domainRedirects[$host])) {
 			$host = $domainRedirects[$host];
 			if (empty($url)) {
-				$url = $_SERVER["REQUEST_URI"];
+				$url = $currentUri;
 			}
 		}
 

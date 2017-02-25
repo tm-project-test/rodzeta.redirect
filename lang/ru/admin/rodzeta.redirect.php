@@ -20,3 +20,5 @@ $MESS["RODZETA_REDIRECT_OPTIONS_MULTISLASH_TITLE"] =
 	"Редирект с удалением множественных слешей,<br>//news///index.php -> <b>/news/</b>";
 
 $MESS["RODZETA_REDIRECT_URLS_TITLE"] = "Использовать редиректы из списка";
+
+$MESS["RODZETA_REDIRECT_IGNORE_QUERY"] = "Игнорировать параметры в урл";

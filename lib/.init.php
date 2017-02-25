@@ -34,6 +34,7 @@ function Options() {
 			"redirect_slash" => "Y",
 			"redirect_index" => "Y",
 			"redirect_urls" => "N",
+			"ignore_query" => "Y",
 		);
 	return $result;
 }
@@ -46,6 +47,7 @@ function OptionsUpdate($data) {
 		"redirect_index" => $data["redirect_index"],
 		"redirect_multislash" => $data["redirect_multislash"],
 		"redirect_urls" => $data["redirect_urls"],
+		"ignore_query" => $data["ignore_query"],
 	));
 }
 

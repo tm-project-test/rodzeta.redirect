@@ -124,6 +124,18 @@ $currentOptions = Options();
 			<tr>
 				<td class="adm-detail-content-cell-l" width="50%">
 					<label>
+						<?= Loc::getMessage("RODZETA_REDIRECT_IGNORE_QUERY") ?>
+					</label>
+				</td>
+				<td class="adm-detail-content-cell-r" width="50%">
+					<input name="ignore_query" value="Y" type="checkbox"
+						<?= $currentOptions["ignore_query"] == "Y"? "checked" : "" ?>>
+				</td>
+			</tr>
+
+			<tr>
+				<td class="adm-detail-content-cell-l" width="50%">
+					<label>
 						<?= Loc::getMessage("RODZETA_REDIRECT_URLS_TITLE") ?>
 					</label>
 				</td>
