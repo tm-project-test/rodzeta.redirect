@@ -9,8 +9,10 @@ namespace Rodzeta\Redirect;
 
 if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 
-use Bitrix\Main\Loader;
 use Bitrix\Main\EventManager;
+use Bitrix\Main\Localization\Loc;
+
+Loc::loadMessages(__FILE__);
 
 require __DIR__ . "/lib/.init.php";
 
@@ -35,10 +37,10 @@ function init() {
 		));
 	  $APPLICATION->AddPanelButton(array(
 			"HREF" => $link,
-			"ICON"  => "bx-panel-site-structure-icon",
+			"ICON" => "bx-panel-site-structure-icon",
 			//"SRC" => URL_ADMIN . "/icon.gif",
-			"TEXT"  => "Типовые редиректы",
-			"ALT" => "Типовые редиректы",
+			"TEXT" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
+			"ALT" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
 			"MAIN_SORT" => 2000,
 			"SORT"      => 200
 		));
@@ -56,10 +58,10 @@ function init() {
 		));
 	  $APPLICATION->AddPanelButton(array(
 			"HREF" => $link,
-			"ICON"  => "bx-panel-site-structure-icon",
+			"ICON" => "bx-panel-site-structure-icon",
 			//"SRC" => URL_ADMIN . "/icon.gif",
-			"TEXT"  => "Список редиректов",
-			"ALT" => "Список редиректов",
+			"TEXT" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
+			"ALT" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
 			"MAIN_SORT" => 2000,
 			"SORT"      => 220
 		));
@@ -85,7 +87,8 @@ function init() {
 		$url = null;
 		$isAbsoluteUrl = false;
 
-		if ($currentOptions["redirect_www"] == "Y" && substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
+		if ($currentOptions["redirect_www"] == "Y"
+				&& substr($_SERVER["SERVER_NAME"], 0, 4) == "www.") {
 			$host = substr($_SERVER["SERVER_NAME"], 4);
 			$url = $_SERVER["REQUEST_URI"];
 		}
