@@ -52,8 +52,8 @@ function OptionsUpdate($data) {
 function AppendValues($data, $n, $v) {
 	//yield from $data;
 	$result = array();
-	foreach ($data as $v) {
-		$result[] = $v;
+	foreach ($data as $url) {
+		$result[] = $url;
 	}
 	for ($i = 0; $i < $n; $i++) {
 		//yield  $v;
