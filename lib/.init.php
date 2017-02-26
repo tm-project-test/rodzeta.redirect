@@ -83,7 +83,7 @@ function Update($data) {
 		$to = trim($url[1]);
 		if ($from != "" && $to != "") {
 			$urls[] = $url;
-			$urlsMap[$from] = array($to, trim($url[2]));
+			$urlsMap[$from] = array($to, trim($url[2]), trim($url[3]));
 		}
 	}
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);

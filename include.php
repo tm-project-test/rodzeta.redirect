@@ -151,6 +151,18 @@ function init() {
 				if (substr($url, 0, 4) == "http") {
 					$isAbsoluteUrl = true;
 				}
+			} else {
+				// find part url
+				foreach ($redirects as $fromUri => $v) {
+					list($toUri, $status, $partUrl) = $v;
+					if ($partUrl != "Y") {
+						continue;
+					}
+					if (substr($currentUri, 0, strlen($fromUri)) == $fromUri) {
+						$url = $toUri . substr($currentUri, strlen($fromUri));
+						break;
+					}
+				}
 			}
 		}
 		$status = $status == "302"?

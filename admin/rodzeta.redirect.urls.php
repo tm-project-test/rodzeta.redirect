@@ -68,6 +68,11 @@ $currentOptions = Select(true);
 							<option value="302" <?= $url[2] == "302"? "selected" : "" ?>>302</option>
 						</select>
 					</td>
+					<td>
+						<input name="redirect_urls[<?= $i ?>][3]" value="Y" type="checkbox"
+							title="<?= Loc::getMessage("RODZETA_REDIRECT_URLS_IS_PART_URL") ?>"
+							<?= $url[3] == "Y"? "checked" : "" ?>>
+					</td>
 				</tr>
 			<?php } ?>
 		</tbody>
