@@ -17,8 +17,6 @@
 
 [Багрепорты и предложения](https://github.com/rivetweb/rodzeta.redirect/issues)
 
-[Пул реквесты](https://github.com/rivetweb/rodzeta.redirect/pulls)
-
 ## Ссылка на демо-версию
 
 [http://rodzeta.ru/](http://rodzeta.ru/)

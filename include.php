@@ -19,7 +19,7 @@ require __DIR__ . "/lib/.init.php";
 function init() {
 	EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
 		global $USER, $APPLICATION;
-		// TODO заменить на определение доступа к редактированию конента
+		// TODO use rights "can edit content"
 		if (!$USER->IsAdmin()) {
 		  return;
 		}
