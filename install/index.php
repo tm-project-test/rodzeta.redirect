@@ -47,6 +47,7 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function InstallFiles() {
+		// TODO fix
 		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
 		$modulePath = $_SERVER["DOCUMENT_ROOT"]
 			. "/bitrix/modules/" . $this->MODULE_ID;
@@ -60,6 +61,7 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function UninstallFiles() {
+		// TODO fix
 		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
 		unlink($path . $this->MODULE_ID . ".php");
 		unlink($path . $this->MODULE_ID . ".urls.php");

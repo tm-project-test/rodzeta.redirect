@@ -1,6 +1,0 @@
-<?php
-
-$MESS["RODZETA_REDIRECT_URLS_FROM"] = "Откуда";
-$MESS["RODZETA_REDIRECT_URLS_TO"] = "Куда";
-$MESS["RODZETA_REDIRECT_URLS_STATUS"] = "Статус";
-$MESS["RODZETA_REDIRECT_URLS_IS_PART_URL"] = "Редиректить с части урла";
