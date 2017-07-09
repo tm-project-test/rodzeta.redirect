@@ -41,6 +41,9 @@ function Options() {
 }
 
 function OptionsUpdate($data) {
+	if (!is_dir(CONFIG)) {
+		@mkdir(CONFIG, 0777, true);
+	}
 	\Encoding\PhpArray\Write(FILE_OPTIONS, [
 		"redirect_www" => $data["redirect_www"],
 		"redirect_https" => $data["redirect_https"],
@@ -70,6 +73,9 @@ function Update($data) {
 			$urls[] = $url;
 			$urlsMap[$from] = [$to, trim($url[2]), trim($url[3])];
 		}
+	}
+	if (!is_dir(CONFIG)) {
+		@mkdir(CONFIG, 0777, true);
 	}
 	\Encoding\Csv\Write(FILE_REDIRECTS, $urls);
 	\Encoding\PhpArray\Write(FILE_REDIRECTS_CACHE, $urlsMap);

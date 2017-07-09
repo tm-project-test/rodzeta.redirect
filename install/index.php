@@ -47,7 +47,6 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function InstallFiles() {
-		@mkdir($_SERVER["DOCUMENT_ROOT"] . "/local/config/." . $this->MODULE_ID, 0777, true);
 		return true;
 	}
 
