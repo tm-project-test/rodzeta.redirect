@@ -1,10 +1,9 @@
 <?php
 
 $MESS["RODZETA_REDIRECT_BTN_OPTIONS"] = "Типовые редиректы";
-$MESS["RODZETA_REDIRECT_TITLE_OPTIONS"] = "Настройка типовых редиректов";
 
 $MESS["RODZETA_REDIRECT_BTN_REDIRECTS"] = "Список редиректов";
-$MESS["RODZETA_REDIRECT_TITLE_REDIRECTS"] = "Настройка урл редиректов";
+$MESS["RODZETA_REDIRECT_TITLE_REDIRECTS"] = "Настройка URL редиректов";
 
 $MESS["RODZETA_REDIRECT_OPTIONS_TITLE"] = "Настройка типовых редиректов";
 $MESS["RODZETA_REDIRECT_OPTIONS_WWW_TITLE"] =
@@ -27,11 +26,11 @@ $MESS["RODZETA_REDIRECT_OPTIONS_MULTISLASH_TITLE"] =
 
 $MESS["RODZETA_REDIRECT_URLS_TITLE"] = "Использовать редиректы из списка";
 
-$MESS["RODZETA_REDIRECT_IGNORE_QUERY"] = "Игнорировать параметры в урл";
+$MESS["RODZETA_REDIRECT_IGNORE_QUERY"] = "Игнорировать параметры в URL";
 
 $MESS["RODZETA_REDIRECT_URLS_FROM"] = "Откуда";
 $MESS["RODZETA_REDIRECT_URLS_TO"] = "Куда";
 $MESS["RODZETA_REDIRECT_URLS_STATUS"] = "Статус";
-$MESS["RODZETA_REDIRECT_URLS_IS_PART_URL"] = "Редиректить с части урла";
+$MESS["RODZETA_REDIRECT_URLS_IS_PART_URL"] = "Редиректить с части URL";
 
 $MESS["RODZETA_REDIRECT_SAVE_SETTINGS"] = "Применить настройки";

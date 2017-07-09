@@ -25,7 +25,7 @@ $tabControl = new \CAdminTabControl("tabControl", [
   [
 		"DIV" => "edit1",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
-		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_TITLE_OPTIONS"),
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_OPTIONS_TITLE"),
   ],
   [
 		"DIV" => "edit2",
@@ -52,11 +52,6 @@ $tabControl->begin();
 
 	<?php $tabControl->beginNextTab() ?>
 
-	<tr class="heading">
-		<td colspan="2"><b><?= Loc::getMessage("RODZETA_REDIRECT_OPTIONS_TITLE") ?></b></td>
-	</tr>
-
-	
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>
