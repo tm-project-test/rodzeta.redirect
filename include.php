@@ -14,9 +14,15 @@ use Bitrix\Main\Localization\Loc;
 
 Loc::loadMessages(__FILE__);
 
-require __DIR__ . "/lib/.init.php";
+require __DIR__ . "/.init.php";
 
 function init() {
+	// ignore for cli scripts and cron scripts
+	if (php_sapi_name() == "cli" || defined("BX_CRONTAB")) {
+		return;
+	}
+
+	/*
 	EventManager::getInstance()->addEventHandler("main", "OnPanelCreate", function () {
 		global $USER, $APPLICATION;
 		// TODO use rights "can edit content"
@@ -66,6 +72,7 @@ function init() {
 			"SORT"      => 220
 		));
 	});
+	*/
 
 	EventManager::getInstance()->addEventHandler("main", "OnBeforeProlog", function () {
 		//if ($_SERVER["REQUEST_METHOD"] != "GET" && $_SERVER["REQUEST_METHOD"] != "HEAD") {
