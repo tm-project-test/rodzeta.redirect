@@ -1,7 +1,10 @@
 <?php
 
 $MESS["RODZETA_REDIRECT_BTN_OPTIONS"] = "Типовые редиректы";
+$MESS["RODZETA_REDIRECT_TITLE_OPTIONS"] = "Настройка типовых редиректов";
+
 $MESS["RODZETA_REDIRECT_BTN_REDIRECTS"] = "Список редиректов";
+$MESS["RODZETA_REDIRECT_TITLE_REDIRECTS"] = "Настройка урл редиректов";
 
 $MESS["RODZETA_REDIRECT_OPTIONS_TITLE"] = "Настройка типовых редиректов";
 $MESS["RODZETA_REDIRECT_OPTIONS_WWW_TITLE"] =

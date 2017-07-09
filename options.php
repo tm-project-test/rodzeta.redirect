@@ -25,31 +25,22 @@ $tabControl = new \CAdminTabControl("tabControl", [
   [
 		"DIV" => "edit1",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
-		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_TITLE_OPTIONS"),
   ],
   [
 		"DIV" => "edit2",
 		"TAB" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
-		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
+		"TITLE" => Loc::getMessage("RODZETA_REDIRECT_TITLE_REDIRECTS"),
   ],  
 ]);
 
-?>
-
-<?php
-
-$formSaved = check_bitrix_sessid() && $request->isPost();
-if ($formSaved) {
-	/*
-	$data = $request->getPostList();
-	OptionsUpdate($request->getPostList());
-	*/
-
-	/*
-	Update($request->getPostList());
-	*/
+if (check_bitrix_sessid() && $request->isPost()) {
+	if ($request->getPost("save") != "") {
+		$data = $request->getPostList();
+		OptionsUpdate($data);
+		Update($data);
+	}
 }
-
 $currentOptions = Options();
 
 $tabControl->begin();
