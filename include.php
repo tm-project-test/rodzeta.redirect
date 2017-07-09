@@ -137,58 +137,6 @@ function HandlerRedirectUrl() {
 }
 
 function init() {
-	/*
-	AddEventHandler("main", "OnPanelCreate", function () {
-		global $USER, $APPLICATION;
-		// TODO use rights "can edit content"
-		if (!$USER->IsAdmin()) {
-		  return;
-		}
-
-		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-			"URL" => URL_ADMIN . ".php",
-			"PARAMS" => array(
-				"resizable" => true,
-				//"width" => 780,
-				//"height" => 570,
-				//"min_width" => 400,
-				//"min_height" => 200,
-				"buttons" => "[BX.CDialog.prototype.btnClose]"
-			)
-		));
-	  $APPLICATION->AddPanelButton(array(
-			"HREF" => $link,
-			"ICON" => "bx-panel-site-structure-icon",
-			//"SRC" => URL_ADMIN . "/icon.gif",
-			"TEXT" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
-			"ALT" => Loc::getMessage("RODZETA_REDIRECT_BTN_OPTIONS"),
-			"MAIN_SORT" => 2000,
-			"SORT"      => 200
-		));
-
-		$link = "javascript:" . $APPLICATION->GetPopupLink(array(
-			"URL" => URL_ADMIN . ".urls.php",
-			"PARAMS" => array(
-				"resizable" => true,
-				//"width" => 780,
-				//"height" => 570,
-				//"min_width" => 400,
-				//"min_height" => 200,
-				"buttons" => "[BX.CDialog.prototype.btnClose]"
-			)
-		));
-	  $APPLICATION->AddPanelButton(array(
-			"HREF" => $link,
-			"ICON" => "bx-panel-site-structure-icon",
-			//"SRC" => URL_ADMIN . "/icon.gif",
-			"TEXT" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
-			"ALT" => Loc::getMessage("RODZETA_REDIRECT_BTN_REDIRECTS"),
-			"MAIN_SORT" => 2000,
-			"SORT"      => 220
-		));
-	});
-	*/
-
 	AddEventHandler(
 		"main",
 		"OnBeforeProlog",

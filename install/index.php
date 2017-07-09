@@ -47,24 +47,12 @@ class rodzeta_redirect extends CModule {
 	}
 
 	function InstallFiles() {
-		// TODO fix
-		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
-		$modulePath = $_SERVER["DOCUMENT_ROOT"]
-			. "/bitrix/modules/" . $this->MODULE_ID;
-		CopyDirFiles(
-			$modulePath . "/install/admin/",
-			$path,
-			true,
-			true
-		);
+		@mkdir($_SERVER["DOCUMENT_ROOT"] . "/local/config/." . $this->MODULE_ID, 0777, true);
 		return true;
 	}
 
 	function UninstallFiles() {
-		// TODO fix
-		$path = $_SERVER["DOCUMENT_ROOT"] . "/bitrix/admin/";
-		unlink($path . $this->MODULE_ID . ".php");
-		unlink($path . $this->MODULE_ID . ".urls.php");
+		//...
 		return true;
 	}
 
