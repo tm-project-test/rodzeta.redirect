@@ -214,81 +214,14 @@ $tabControl->begin();
 		</td>
 	</tr>
 
-	<?php /*
-
-	<tr class="heading">
-		<td colspan="2"><b><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_JS_CSS_SECTION") ?></b></td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_MOVE_STYLES") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="move_css" value="Y" type="checkbox"
-				<?= $options["move_css"] == "Y"? "checked" : "" ?>>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_JS_CSS_FOLDERS") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="js_css_src_folders" cols="60" rows="10"><?= implode("\n", $options["js_css"]["src_folders"]) ?></textarea>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_JS_CSS_FILES") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="js_css_src_files" cols="60" rows="10"><?= implode("\n", $options["js_css"]["src_files"]) ?></textarea>
-		</td>
-	</tr>
-
-	<tr class="heading">
-		<td colspan="2"><b><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_IMAGES_SECTION") ?></b></td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_IMAGES_QUALITY") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="images_quality" value="<?= $options["images"]["quality"] ?>" type="text">
-		</td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_IMAGES_FOLDERS") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="images_src_folders" cols="60" rows="10"><?= implode("\n", $options["images"]["src_folders"]) ?></textarea>
-		</td>
-	</tr>
-
-	<tr>
-		<td class="adm-detail-content-cell-l" width="50%">
-			<label><?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_IMAGES_FILES") ?></label>
-		</td>
-		<td class="adm-detail-content-cell-r" width="50%">
-			<textarea name="images_src_files" cols="60" rows="10"><?= implode("\n", $options["images"]["src_files"]) ?></textarea>
-		</td>
-	</tr>
-
 	<?php
 	 $tabControl->buttons();
   ?>
 
   <input class="adm-btn-save" type="submit" name="save"
-  	value="<?= Loc::getMessage("RODZETA_PAGEOPTIMIZEPLUS_SAVE_SETTINGS") ?>">
+  	value="<?= Loc::getMessage("RODZETA_REDIRECT_SAVE_SETTINGS") ?>">
 
 </form>
-
-*/ ?>
 
 <?php
 
