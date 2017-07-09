@@ -144,4 +144,4 @@ function init() {
 	);
 }
 
-//init();
+init();
