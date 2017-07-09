@@ -175,7 +175,7 @@ $tabControl->begin();
 				<tbody>
 					<?php
 					$i = 0;
-					foreach (AppendValues(Select(true), 5, array("", "", "")) as $url) {
+					foreach (AppendValues(Select(true), 5, ["", "", ""]) as $url) {
 						$i++;
 					?>
 						<tr data-idx="<?= $i ?>">

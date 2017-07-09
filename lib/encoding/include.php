@@ -21,7 +21,7 @@ namespace Encoding\Csv {
 		}
 
 		function Read($fname, $sep = "\t") {
-			$result = array();
+			$result = [];
 			$f = fopen($fname, "r");
 			if ($f === false) {
 				return $result;
@@ -78,7 +78,7 @@ namespace Encoding\PhpConst {
 namespace Encoding\Ssi {
 	if (!function_exists("\Encoding\Ssi\Write")) {
 		function Write($fname, $data, $additional = "") {
-			$vars = array();
+			$vars = [];
 			foreach ($data as $k => $v) {
 				$vars[] = '<!--#set var="' . $k . '" value="' . htmlentities($v) . '"-->';
 			}
