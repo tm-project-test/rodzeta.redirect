@@ -12,7 +12,7 @@ const APP = __DIR__ . "/";
 const LIB = APP  . "lib/";
 
 define(__NAMESPACE__ . "\CONFIG",
-	$_SERVER["DOCUMENT_ROOT"] . "local/config/." . ID . "/");
+	$_SERVER["DOCUMENT_ROOT"] . "/local/config/." . ID . "/");
 
 const FILE_OPTIONS = CONFIG . "options.php";
 const FILE_REDIRECTS = CONFIG . "urls.csv";
