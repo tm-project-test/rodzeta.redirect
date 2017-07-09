@@ -10,7 +10,9 @@ namespace Rodzeta\Redirect;
 const ID = "rodzeta.redirect";
 const APP = __DIR__ . "/";
 const LIB = APP  . "lib/";
-const CONFIG = "local/config/." . ID . "/"; // use with $_SERVER["DOCUMENT_ROOT"];
+
+define(__NAMESPACE__ . "\CONFIG",
+	$_SERVER["DOCUMENT_ROOT"] . "local/config/." . ID . "/");
 
 const FILE_OPTIONS = CONFIG . "options.php";
 const FILE_REDIRECTS = CONFIG . "urls.csv";
