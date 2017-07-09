@@ -146,8 +146,8 @@ $tabControl->begin();
 			</label>
 		</td>
 		<td class="adm-detail-content-cell-r" width="50%">
-			<input name="redirect_urls" value="Y" type="checkbox"
-				<?= $currentOptions["redirect_urls"] == "Y"? "checked" : "" ?>>
+			<input name="use_redirect_urls" value="Y" type="checkbox"
+				<?= $currentOptions["use_redirect_urls"] == "Y"? "checked" : "" ?>>
 			<?= str_replace($_SERVER["DOCUMENT_ROOT"], "", FILE_REDIRECTS) ?>
 		</td>
 	</tr>

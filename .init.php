@@ -35,7 +35,7 @@ function Options() {
 			"redirect_https" => "",
 			"redirect_slash" => "Y",
 			"redirect_index" => "Y",
-			"redirect_urls" => "N",
+			"use_redirect_urls" => "N",
 			"ignore_query" => "Y",
 		];
 }
@@ -47,7 +47,7 @@ function OptionsUpdate($data) {
 		"redirect_slash" => $data["redirect_slash"],
 		"redirect_index" => $data["redirect_index"],
 		"redirect_multislash" => $data["redirect_multislash"],
-		"redirect_urls" => $data["redirect_urls"],
+		"use_redirect_urls" => $data["use_redirect_urls"],
 		"ignore_query" => $data["ignore_query"],
 	]);
 }

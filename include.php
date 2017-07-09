@@ -93,7 +93,7 @@ function HandlerRedirectUrl() {
 	}
 
 	$status = "";
-	if ($currentOptions["redirect_urls"] == "Y") {
+	if ($currentOptions["use_redirect_urls"] == "Y") {
 		$redirects = Select();
 		if (isset($redirects[$currentUri])) {
 			list($url, $status) = $redirects[$currentUri];
