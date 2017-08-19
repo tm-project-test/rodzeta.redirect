@@ -28,6 +28,8 @@ $MESS["RODZETA_REDIRECT_URLS_TITLE"] = "Использовать редирек�
 
 $MESS["RODZETA_REDIRECT_IGNORE_QUERY"] = "Игнорировать параметры в URL";
 
+$MESS["RODZETA_REDIRECT_FROM_404"] = "Редирект с 404 ошибки";
+
 $MESS["RODZETA_REDIRECT_URLS_FROM"] = "Откуда";
 $MESS["RODZETA_REDIRECT_URLS_TO"] = "Куда";
 $MESS["RODZETA_REDIRECT_URLS_STATUS"] = "Статус";

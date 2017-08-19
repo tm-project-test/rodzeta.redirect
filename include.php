@@ -136,12 +136,40 @@ function HandlerRedirectUrl() {
 	}
 }
 
+function OnEpilog() {
+	if (!defined("ERROR_404") || ERROR_404 != "Y") {
+		return;
+	}
+	global $APPLICATION;
+	// get parent level url
+	$uri = parse_url($APPLICATION->GetCurPage(false), PHP_URL_PATH);
+	$segments = explode("/", trim($uri, "/"));
+	array_pop($segments);
+	if (count($segments) > 0) {
+		$uri = "/" . implode("/", $segments) . "/";
+	} else {
+		$uri = "/";
+	}
+	// redirect
+	LocalRedirect($uri, false, "301 Moved Permanently");
+	exit;
+}
+
 function init() {
 	AddEventHandler(
 		"main",
 		"OnBeforeProlog",
 		__NAMESPACE__ . "\\HandlerRedirectUrl"
 	);
+
+	$options = Options();
+	if ($options["redirect_from_404"] == "Y") {
+		AddEventHandler(
+			"main",
+			"OnEpilog",
+			__NAMESPACE__ . "\\OnEpilog"
+		);
+	}
 }
 
 init();

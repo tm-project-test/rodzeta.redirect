@@ -142,6 +142,18 @@ $tabControl->begin();
 	<tr>
 		<td class="adm-detail-content-cell-l" width="50%">
 			<label>
+				<?= Loc::getMessage("RODZETA_REDIRECT_FROM_404") ?>
+			</label>
+		</td>
+		<td class="adm-detail-content-cell-r" width="50%">
+			<input name="redirect_from_404" value="Y" type="checkbox"
+				<?= $currentOptions["redirect_from_404"] == "Y"? "checked" : "" ?>>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="adm-detail-content-cell-l" width="50%">
+			<label>
 				<?= Loc::getMessage("RODZETA_REDIRECT_URLS_TITLE") ?>
 			</label>
 		</td>
